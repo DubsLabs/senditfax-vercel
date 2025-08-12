@@ -9,6 +9,7 @@ export const generateMetadata = async ({ params }) => {
     title: `Status of Fax #${faxId} - SendItFax`,
     description:
       "Send free faxes to the U.S. and Canada without an account. Options for low-cost, high-priority faxing also available with SendItFax.",
+    robots: { index: false, follow: false },
   };
 };
 
@@ -31,12 +32,16 @@ export default async function Status({ params }) {
     errorMessage = "Error loading fax data";
   }
 
+  const shouldShowAds = Boolean(faxData) && !errorMessage;
+
   return (
     <section className="flex flex-col md:flex-row items-center justify-between gap-4 w-full max-w-7xl mx-auto">
-      {/* Left ad - visible only on desktop */}
-      <div className="hidden md:block md:w-64 lg:w-72 sticky top-4 self-start">
-        <AdSense slotKey="statusLeft" format="vertical" style={{ minHeight: '600px', width: '100%' }} />
-      </div>
+      {/* Left ad - visible only on desktop. Avoid ads on error/empty pages */}
+      {shouldShowAds && (
+        <div className="hidden md:block md:w-64 lg:w-72 sticky top-4 self-start">
+          <AdSense slotKey="statusLeft" format="vertical" style={{ minHeight: '600px', width: '100%' }} />
+        </div>
+      )}
 
       {/* Main content */}
       <div className="flex-grow">
@@ -127,10 +132,12 @@ export default async function Status({ params }) {
         </div>
       </div>
 
-      {/* Right ad - visible only on desktop */}
-      <div className="hidden md:block md:w-64 lg:w-72 sticky top-4 self-start">
-        <AdSense slotKey="statusRight" format="vertical" style={{ minHeight: '600px', width: '100%' }} />
-      </div>
+      {/* Right ad - visible only on desktop. Avoid ads on error/empty pages */}
+      {shouldShowAds && (
+        <div className="hidden md:block md:w-64 lg:w-72 sticky top-4 self-start">
+          <AdSense slotKey="statusRight" format="vertical" style={{ minHeight: '600px', width: '100%' }} />
+        </div>
+      )}
     </section>
   );
 }

@@ -22,7 +22,7 @@ const AdSenseConfig = {
   },
 
   // Testing settings
-  isTest: process.env.NODE_ENV === "development",
+  isTest: false, // process.env.NODE_ENV === "development",
 };
 
 export default AdSenseConfig;
