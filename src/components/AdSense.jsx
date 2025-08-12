@@ -15,8 +15,9 @@ const AdSense = ({ slotKey, format, responsive = true, style = {} }) => {
     setRandomColor(colors[Math.floor(Math.random() * colors.length)]);
 
     try {
-      // If AdSense is already initialized
-      if (adRef.current && (window.adsbygoogle || []).length > 0) {
+      // Always request ad fill after mount when script is available
+      if (adRef.current) {
+        // eslint-disable-next-line no-undef
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (error) {

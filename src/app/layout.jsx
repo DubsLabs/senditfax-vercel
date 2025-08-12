@@ -8,6 +8,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Cookie from "@/components/Cookie";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
+import AdSenseConfig from "@/config/adsense";
 
 const roboto = Roboto({
   weight: ["400", "500", "600", "700", "800"],
@@ -63,6 +64,12 @@ export default function RootLayout({ children }) {
     <html lang="en" className={roboto.className}>
       <head>
         <meta name="google-adsense-account" content="ca-pub-1688764604430717"></meta>
+        <Script
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${AdSenseConfig.client}`}
+          crossOrigin="anonymous"
+        />
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function (c, l, a, r, i, t, y) {
