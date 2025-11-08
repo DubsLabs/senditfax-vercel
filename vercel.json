@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/blog",
-      "destination": "https://blog.senditfax.com/blog"
+      "destination": "https://blog.senditfax.com"
     },
     {
       "source": "/blog/:path*",
-      "destination": "https://blog.senditfax.com/blog/:path*"
+      "destination": "https://blog.senditfax.com/:path*"
     },
     {
       "source": "/:year/:month/:day/:slug",
@@ -14,4 +14,3 @@
     }
   ]
 }
-
