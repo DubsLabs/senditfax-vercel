@@ -464,17 +464,6 @@ export default function MainInputs() {
           >
             Get Status
           </Button>
-
-          <Button
-            variant="contained"
-            type="button"
-            color="error"
-            onClick={() => {
-              throw new Error("Testing Sentry Error Reporting!");
-            }}
-          >
-            Test Sentry
-          </Button>
         </div>
       )}
 
