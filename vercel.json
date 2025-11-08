@@ -1,0 +1,17 @@
+{
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "https://blog.senditfax.com/blog"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://blog.senditfax.com/blog/:path*"
+    },
+    {
+      "source": "/:year/:month/:day/:slug",
+      "destination": "https://blog.senditfax.com/:year/:month/:day/:slug"
+    }
+  ]
+}
+

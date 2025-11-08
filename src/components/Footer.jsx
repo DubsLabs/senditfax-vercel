@@ -14,6 +14,8 @@ export default function Footer() {
 
           <div className="flex flex-col items-center sm:items-end">
             <nav className="flex gap-2 text-sm sm:gap-4 sm:text-base">
+              <Link href="/blog">Blog</Link>
+              <p>|</p>
               <Link href="/faq">FAQ</Link>
               <p>|</p>
               <Link href="/terms">Terms of Use</Link>
