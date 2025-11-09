@@ -93,6 +93,10 @@ export default function PhoneInput({
         startAdornment: (
           <InputAdornment position="start" style={{ marginRight: "2px", marginLeft: "-8px" }}>
             <Select
+              aria-label={isReceiver ? "Select country code for fax number" : "Select country code for phone number"}
+              inputProps={{ 
+                'aria-label': isReceiver ? "Country code selector for fax" : "Country code selector for phone"
+              }}
               MenuProps={{
                 style: {
                   height: "300px",

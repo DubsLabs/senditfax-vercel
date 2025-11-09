@@ -20,8 +20,13 @@ export default function Cookie() {
   }, []);
 
   const handleCookieConsent = () => {
-    // Save consent in cookies
-    Cookies.set("cookieConsent", "true", { path: "/" });
+    // Save consent in cookies with security attributes
+    Cookies.set("cookieConsent", "true", { 
+      path: "/",
+      sameSite: "Lax", // Prevent CSRF attacks
+      secure: true,     // Only send over HTTPS
+      expires: 365      // 1 year
+    });
     setShowBanner(false);
   };
 

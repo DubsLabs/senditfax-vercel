@@ -89,7 +89,12 @@ export default function UppyFileUploader({ uppyFiles, setUppyFiles, totalPages, 
 
   return (
     <>
-      <FileInput uppy={uppy} className="uppy-button" />
+      <FileInput 
+        uppy={uppy} 
+        className="uppy-button"
+        inputName="files"
+        aria-label="Choose files to fax (PDF or DOCX)"
+      />
       <StatusBar uppy={uppy} hideUploadButton />
 
       {uppyFiles.length > 0 && (
