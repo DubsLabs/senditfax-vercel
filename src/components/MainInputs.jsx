@@ -134,8 +134,8 @@ export default function MainInputs() {
   return (
     <>
       <div className="flex flex-col justify-between w-full gap-6 md:flex-row md:gap-8">
-        <div className="flex flex-col items-center w-full gap-1 input-info-new">
-          <h2 className="font-semibold text-center text-base border-b-2 border-b-[#1878f3] border-solid mb-5 cursor-default">SENDER INFORMATION</h2>
+        <div className="flex flex-col items-center w-full gap-1 input-info-new bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="font-semibold text-center text-base border-b-2 border-b-[#1878f3] border-solid mb-4 pb-2 cursor-default w-full" role="heading" aria-level="2">SENDER INFORMATION</div>
 
           <TextField
             size="small"
@@ -200,8 +200,8 @@ export default function MainInputs() {
             onBlur={(e) => inputErrorsChecker("senderPhone", e.target.value, setInputErrors)}
           />
         </div>
-        <div className="flex flex-col items-center w-full gap-1 input-info-new">
-          <h2 className="text-base font-semibold text-center border-b-2 border-b-[#1878f3] mb-5 border-solid cursor-default">RECEIVER INFORMATION</h2>
+        <div className="flex flex-col items-center w-full gap-1 input-info-new bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="text-base font-semibold text-center border-b-2 border-b-[#1878f3] mb-4 pb-2 border-solid cursor-default w-full" role="heading" aria-level="2">RECEIVER INFORMATION</div>
 
           <TextField
             size="small"
@@ -252,27 +252,27 @@ export default function MainInputs() {
         </div>
       </div>
 
-      <div className="p-4 w-full flex flex-col items-center gap-5 text-center bg-[#efefef] border-2 border-solid border-[#1878f3]">
-        <h2 className="w-full text-base font-semibold cursor-default">FAX INFORMATION</h2>
+      <div className="p-4 w-full flex flex-col items-center gap-5 text-center bg-gradient-to-b from-blue-50 to-white rounded-lg shadow-sm border-2 border-solid border-[#1878f3] mt-6">
+        <div className="w-full text-base font-semibold cursor-default" role="heading" aria-level="2">FAX INFORMATION</div>
 
         <div className="flex flex-col items-center text-sm w-full max-w-[350px]">
-          <h3 className="cursor-default">
+          <div className="cursor-default font-medium">
             Attach <span className="underline">one or more files</span> (DOC, DOCX, or PDF)
-          </h3>
+          </div>
           <p className="text-center cursor-default">Attach all files now, can't add more later. Total page limit is 3 (free) or 25 (paid) pages.</p>
 
           <UppyFileUploader uppyFiles={uppyFiles} setUppyFiles={setUppyFiles} totalPages={totalPages} setTotalPages={setTotalPages} />
         </div>
 
         <div className="w-full text-sm">
-          <h3 className="cursor-default">Enter text below to appear on the cover page:</h3>
+          <div className="cursor-default font-medium">Enter text below to appear on the cover page:</div>
           <p className="cursor-default">(Text is optional. You can use only an attachment, just text, or both.)</p>
 
           <textarea
             id="coverPageText"
-            className={`w-full h-[100px] text-sm resize-none mt-3 outline-none 
-            ${isCoverPageRemoved ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-white"} 
-            transition-colors duration-200`}
+            className={`w-full h-[100px] text-sm resize-none mt-3 p-3 rounded-lg border-2 outline-none 
+            ${isCoverPageRemoved ? "bg-gray-200 text-gray-500 cursor-not-allowed border-gray-300" : "bg-white border-gray-300 focus:border-blue-500"} 
+            transition-all duration-200`}
             placeholder="Text for CoverPage (Max 500 characters)"
             maxLength="500"
             value={isCoverPageRemoved ? "" : textArea}
@@ -299,13 +299,13 @@ export default function MainInputs() {
       </div>
 
       <div className="flex flex-col justify-between w-full gap-6 text-sm md:flex-row md:gap-8">
-        <div className="flex flex-col w-full gap-3 cursor-default">
-          <h2 className="text-base font-semibold">FREE FAX</h2>
+        <div className="flex flex-col w-full gap-3 cursor-default bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
+          <div className="text-base font-semibold border-b border-gray-200 pb-2" role="heading" aria-level="2">FREE FAX</div>
 
-          <ul>
+          <ul className="text-left">
             {featurePoints["Free"].map((el, i) => (
               <li key={i} className="flex items-center">
-                <FaArrowRight className="mr-2" size={12} /> {el}
+                <FaArrowRight className="mr-2 text-blue-600" size={12} /> {el}
               </li>
             ))}
           </ul>
@@ -323,7 +323,15 @@ export default function MainInputs() {
               <Button
                 variant="outlined"
                 type="button"
-                sx={{ color: "white", backgroundColor: "#1878F3", fontWeight: 600 }}
+                sx={{ 
+                  color: "white", 
+                  backgroundColor: "#1878F3", 
+                  fontWeight: 600,
+                  borderRadius: "8px",
+                  "&:hover": {
+                    backgroundColor: "#1565c0",
+                  }
+                }}
                 disabled={totalPages > 3 || isCoverPageRemoved}
                 onClick={async () => {
                   const faxData = await checkFaxLimit();
@@ -341,13 +349,13 @@ export default function MainInputs() {
           </Tooltip>
         </div>
 
-        <div className="flex flex-col w-full gap-3 cursor-default">
-          <h2 className="text-base font-semibold">ALMOST FREE FAX</h2>
+        <div className="flex flex-col w-full gap-3 cursor-default bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
+          <div className="text-base font-semibold border-b border-gray-200 pb-2" role="heading" aria-level="2">ALMOST FREE FAX</div>
 
-          <ul>
+          <ul className="text-left">
             {featurePoints["Paid"].map((el, i) => (
               <li key={i} className="flex items-center">
-                <FaArrowRight className="mr-2" size={12} /> {el}
+                <FaArrowRight className="mr-2 text-blue-600" size={12} /> {el}
               </li>
             ))}
           </ul>
@@ -358,7 +366,15 @@ export default function MainInputs() {
                 variant="outlined"
                 type="button"
                 onClick={() => sendFaxHandler(true)}
-                sx={{ color: "white", backgroundColor: "#1878F3", fontWeight: 600 }}
+                sx={{ 
+                  color: "white", 
+                  backgroundColor: "#1878F3", 
+                  fontWeight: 600,
+                  borderRadius: "8px",
+                  "&:hover": {
+                    backgroundColor: "#1565c0",
+                  }
+                }}
               >
                 SEND $1.99 FAX NOW
               </Button>

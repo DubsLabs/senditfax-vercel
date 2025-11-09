@@ -26,14 +26,16 @@ export default function StatusInputs() {
         }}
       />
 
-      <Button
-        variant="outlined"
-        type="button"
-        onClick={() => setIsSidebarOpen(true)}
-        sx={{ color: "white", backgroundColor: "#1878F3", fontWeight: 600 }}
-      >
-        Leave a Tip
-      </Button>
+      <div className="flex justify-center w-full">
+        <Button
+          variant="outlined"
+          type="button"
+          onClick={() => setIsSidebarOpen(true)}
+          sx={{ color: "white", backgroundColor: "#1878F3", fontWeight: 600 }}
+        >
+          Leave a Tip
+        </Button>
+      </div>
 
       <Drawer anchor="right" size="md" open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
         <StripeRootTip setIsSidebarOpen={setIsSidebarOpen} tipAmount={tipAmount} />

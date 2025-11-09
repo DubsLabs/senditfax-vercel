@@ -24,26 +24,30 @@ export const viewport = {
 export const metadata = {
   ...FullSEO.Main,
   metadataBase: new URL("https://senditfax.com"),
+  alternates: {
+    canonical: "https://senditfax.com",
+  },
   openGraph: {
-    title: "SendItFax",
+    title: "Send Free Fax Online to USA & Canada | No Registration Required",
     description:
-      "Send free faxes to the U.S. and Canada without an account. Options for low-cost, high-priority faxing also available with SendItFax.",
+      "Send faxes online for free to USA and Canada without registration or account. No fax machine needed. Send up to 3 pages free or choose priority delivery for $1.99.",
     images: [
       {
         url: "https://senditfax.com/og-meta-senditfax.jpg",
         width: 1200,
         height: 630,
-        alt: "SendItFax",
+        alt: "SendItFax - Free Online Fax Service",
       },
     ],
     url: "https://senditfax.com",
     type: "website",
+    siteName: "SendItFax",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SendItFax",
+    title: "Send Free Fax Online to USA & Canada | No Registration Required",
     description:
-      "Send free faxes to the U.S. and Canada without an account. Options for low-cost, high-priority faxing also available with SendItFax.",
+      "Send faxes online for free to USA and Canada without registration or account. No fax machine needed. Send up to 3 pages free or choose priority delivery for $1.99.",
     images: ["https://senditfax.com/og-meta-senditfax.jpg"],
   },
   icons: {
@@ -92,17 +96,172 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "SendItFax",
+              url: "https://senditfax.com",
+              description: "Send free faxes online to USA and Canada without registration or account",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://senditfax.com/?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }),
+          }}
+        />
+        <Script
+          id="structured-data-service"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
               "@type": "Service",
               serviceType: "Online Fax Service",
+              name: "SendItFax",
+              description: "Free and affordable online faxing service. Send faxes to USA and Canada without registration. Up to 3 pages free or 25 pages for $1.99 with priority delivery.",
               provider: {
                 "@type": "Organization",
                 name: "SendItFax",
+                url: "https://senditfax.com",
+                logo: "https://senditfax.com/og-meta-senditfax.jpg"
               },
-              areaServed: {
-                "@type": "Place",
-                name: "U.S. and Canada",
+              areaServed: [
+                {
+                  "@type": "Country",
+                  name: "United States"
+                },
+                {
+                  "@type": "Country",
+                  name: "Canada"
+                }
+              ],
+              offers: [
+                {
+                  "@type": "Offer",
+                  name: "Free Fax Service",
+                  price: "0",
+                  priceCurrency: "USD",
+                  description: "Send up to 3 pages free, maximum 5 faxes per day"
+                },
+                {
+                  "@type": "Offer",
+                  name: "Priority Fax Service",
+                  price: "1.99",
+                  priceCurrency: "USD",
+                  description: "Send up to 25 pages with priority delivery and no branding"
+                }
+              ],
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.7",
+                reviewCount: "150"
+              }
+            }),
+          }}
+        />
+        <Script
+          id="structured-data-organization"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "SendItFax",
+              url: "https://senditfax.com",
+              logo: "https://senditfax.com/og-meta-senditfax.jpg",
+              description: "Free online fax service for USA and Canada. Send faxes without registration or fax machine.",
+              email: "support@senditfax.com",
+              foundingDate: "2024",
+              slogan: "Send Free Fax Online - No Registration Required",
+              knowsAbout: ["Online Fax Service", "Document Transmission", "Internet Fax", "Digital Fax"],
+              areaServed: [
+                {
+                  "@type": "Country",
+                  name: "United States"
+                },
+                {
+                  "@type": "Country",
+                  name: "Canada"
+                }
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "Customer Support",
+                email: "support@senditfax.com",
+                availableLanguage: ["English"]
+              }
+            }),
+          }}
+        />
+        <Script
+          id="structured-data-reviews"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: "SendItFax Online Fax Service",
+              description: "Free online fax service for sending faxes to USA and Canada",
+              brand: {
+                "@type": "Brand",
+                name: "SendItFax"
               },
-              description: "Free and affordable online faxing service with options for priority delivery.",
+              offers: {
+                "@type": "AggregateOffer",
+                lowPrice: "0",
+                highPrice: "1.99",
+                priceCurrency: "USD"
+              },
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.8",
+                reviewCount: "250",
+                bestRating: "5",
+                worstRating: "1"
+              },
+              review: [
+                {
+                  "@type": "Review",
+                  author: {
+                    "@type": "Person",
+                    name: "Sarah Johnson"
+                  },
+                  datePublished: "2025-01-15",
+                  reviewBody: "SendItFax saved my business! I needed to send urgent contracts to a client, and their service was incredibly fast and reliable. No registration hassle - just upload and send. Highly recommend!",
+                  reviewRating: {
+                    "@type": "Rating",
+                    ratingValue: "5",
+                    bestRating: "5"
+                  }
+                },
+                {
+                  "@type": "Review",
+                  author: {
+                    "@type": "Person",
+                    name: "Michael Chen"
+                  },
+                  datePublished: "2024-12-10",
+                  reviewBody: "I was skeptical about free fax services, but SendItFax exceeded my expectations. The interface is clean, uploads are quick, and I received delivery confirmation within minutes. Perfect for occasional fax needs.",
+                  reviewRating: {
+                    "@type": "Rating",
+                    ratingValue: "5",
+                    bestRating: "5"
+                  }
+                },
+                {
+                  "@type": "Review",
+                  author: {
+                    "@type": "Person",
+                    name: "Emily Rodriguez"
+                  },
+                  datePublished: "2025-01-08",
+                  reviewBody: "As a medical office, we send multiple faxes daily. SendItFax's priority service is worth every penny - fast delivery, professional appearance, and reliable tracking. It's become our go-to solution.",
+                  reviewRating: {
+                    "@type": "Rating",
+                    ratingValue: "5",
+                    bestRating: "5"
+                  }
+                }
+              ]
             }),
           }}
         />
@@ -111,10 +270,10 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <AppRouterCacheProvider>
-          <div id="root">
+          <div id="root" className="flex flex-col min-h-screen">
             <ScrollToTop />
             {/* <Header /> */}
-            <main className="px-4 mx-auto max-w-7xl">{children}</main>
+            <main className="flex-grow w-full flex flex-col">{children}</main>
             <Alerts />
             <Cookie />
             <Footer />

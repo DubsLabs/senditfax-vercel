@@ -92,36 +92,58 @@ export default function StripeSidebarTip({ setIsSidebarOpen, tipAmount }) {
   };
 
   return (
-    <div className="stripe-payment-block w-full min-w-[400px] flex flex-col items-center gap-6 p-8">
+    <div className="stripe-payment-block w-full min-w-[400px] max-w-[500px] flex flex-col gap-6 p-8 bg-gradient-to-b from-white to-gray-50">
+      {/* Header */}
+      <div className="text-center border-b-2 border-yellow-500 pb-4">
+        <div className="flex items-center justify-center gap-3 mb-2">
+          <span className="text-3xl">☕</span>
+          <h2 className="text-2xl font-bold text-gray-800">Support Us</h2>
+        </div>
+        <p className="text-sm text-gray-600">Your tip helps us keep the service running smoothly</p>
+      </div>
+
       {/* Only Show Dev Mode Instructions in Development */}
       {process.env.NODE_ENV === "development" && (
-        <div className="flex flex-col items-center font-semibold stripe-dev-block">
-          <p>DEV MODE INSTRUCTION!</p>
-          <p>Card Number (Regular) - 4242 4242 4242 4242</p>
-          <p>Card Number (3D Secure) - 4000 0027 6000 3184</p>
-          <p>Date and CVC - Any Valid Numbers</p>
+        <div className="flex flex-col items-center font-semibold stripe-dev-block bg-yellow-50 p-4 rounded-lg border-2 border-yellow-400">
+          <p className="text-yellow-800 mb-2">⚠️ DEV MODE INSTRUCTION!</p>
+          <p className="text-sm text-yellow-700">Card Number (Regular) - 4242 4242 4242 4242</p>
+          <p className="text-sm text-yellow-700">Card Number (3D Secure) - 4000 0027 6000 3184</p>
+          <p className="text-sm text-yellow-700">Date and CVC - Any Valid Numbers</p>
         </div>
       )}
 
-      <div className="text-xl font-semibold">
-        <p>Service: Tip Jar - ${amount}</p>
+      <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+        <div className="flex items-center justify-between">
+          <span className="text-gray-700 font-medium">Tip Amount</span>
+          <span className="text-2xl font-bold text-yellow-600">${amount}</span>
+        </div>
+        <p className="text-xs text-gray-600 mt-1">Thank you for your generosity! 🙏</p>
       </div>
 
-      <PaymentElement className="w-full" />
-      <div className="stripe-block-buttons w-full flex flex-col items-center gap-2.5">
+      <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+        <PaymentElement className="w-full" />
+      </div>
+      <div className="stripe-block-buttons w-full flex flex-col items-center gap-3 mt-2">
         {!isLoading && !isSuccessful && (
           <Button
             onClick={handlePayment}
             variant="contained"
             type="button"
             sx={{
-              height: "45px",
+              height: "52px",
               fontSize: "16px",
               width: "100%",
               fontWeight: 600,
+              backgroundColor: "#eab308",
+              borderRadius: "10px",
+              boxShadow: "0 4px 12px rgba(234, 179, 8, 0.3)",
+              "&:hover": {
+                backgroundColor: "#ca8a04",
+                boxShadow: "0 6px 16px rgba(234, 179, 8, 0.4)",
+              }
             }}
           >
-            Pay ${amount}
+            ☕ Send Tip ${amount}
           </Button>
         )}
 
@@ -131,13 +153,15 @@ export default function StripeSidebarTip({ setIsSidebarOpen, tipAmount }) {
             type="button"
             disabled
             sx={{
-              height: "45px",
+              height: "52px",
               fontSize: "16px",
               width: "100%",
               fontWeight: 600,
+              borderRadius: "10px",
             }}
           >
-            <CircularProgress size={24} />
+            <CircularProgress size={24} sx={{ color: "white" }} />
+            <span className="ml-3">Processing...</span>
           </Button>
         )}
 
@@ -145,35 +169,40 @@ export default function StripeSidebarTip({ setIsSidebarOpen, tipAmount }) {
           <Button
             variant="contained"
             type="button"
-            endIcon={<FaRegCheckCircle />}
+            endIcon={<FaRegCheckCircle size={20} />}
             sx={{
-              backgroundColor: "#30B130",
-              height: "45px",
+              backgroundColor: "#22c55e",
+              height: "52px",
               fontSize: "16px",
               width: "100%",
               fontWeight: 600,
+              borderRadius: "10px",
+              boxShadow: "0 4px 12px rgba(34, 197, 94, 0.3)",
               "&:hover": {
-                backgroundColor: "#30B130",
+                backgroundColor: "#22c55e",
               },
             }}
           >
-            Payment successful
+            Thank You! 🙏
           </Button>
         )}
 
         <Button
           onClick={() => setIsSidebarOpen(false)}
-          variant="text"
+          variant="outlined"
           type="button"
           sx={{
             color: "#DF1B41",
-            marginTop: "14px",
-            height: "45px",
-            fontSize: "16px",
+            borderColor: "#DF1B41",
+            marginTop: "8px",
+            height: "48px",
+            fontSize: "15px",
             width: "100%",
             fontWeight: 600,
+            borderRadius: "10px",
             "&:hover": {
-              backgroundColor: "rgba(223, 27, 65, 0.1)",
+              backgroundColor: "rgba(223, 27, 65, 0.05)",
+              borderColor: "#DF1B41",
             },
           }}
         >

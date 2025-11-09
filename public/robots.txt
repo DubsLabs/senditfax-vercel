@@ -1,2 +1,22 @@
+# Allow all search engines
 User-agent: *
-Disallow:
+Allow: /
+
+# Disallow API routes
+Disallow: /api/
+
+# Disallow dynamic status pages (they contain user-specific info)
+Disallow: /status/
+
+# Allow main pages
+Allow: /faq
+Allow: /about
+Allow: /terms
+Allow: /privacy
+Allow: /blog
+
+# Sitemap
+Sitemap: https://senditfax.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
