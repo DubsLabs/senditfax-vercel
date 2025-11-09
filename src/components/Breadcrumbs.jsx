@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { FaChevronRight, FaHome } from "react-icons/fa";
 
-export default function Breadcrumbs({ items }) {
+function Breadcrumbs({ items }) {
   if (!items || items.length === 0) return null;
 
   return (
@@ -61,4 +61,7 @@ export default function Breadcrumbs({ items }) {
     </nav>
   );
 }
+
+// Memoize Breadcrumbs to prevent unnecessary re-renders when items don't change
+export default React.memo(Breadcrumbs);
 

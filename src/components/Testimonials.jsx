@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { memo } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaQuoteLeft } from "react-icons/fa6";
 
@@ -98,7 +98,7 @@ function TestimonialCard({ testimonial }) {
   );
 }
 
-export default function Testimonials() {
+function Testimonials() {
   return (
     <section className="w-full py-12 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -135,4 +135,7 @@ export default function Testimonials() {
     </section>
   );
 }
+
+// Memoize Testimonials to prevent unnecessary re-renders
+export default memo(Testimonials);
 

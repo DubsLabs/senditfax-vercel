@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export default function Header() {
+function Header() {
   return (
     <header className="flex justify-between items-center bg-[lightgray] px-4 py-3 rounded-br-2xl rounded-bl-2xl">
       <Link href="/">
@@ -18,3 +18,6 @@ export default function Header() {
     </header>
   );
 }
+
+// Memoize Header to prevent unnecessary re-renders
+export default React.memo(Header);

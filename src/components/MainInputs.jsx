@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import axios from "axios";
 import { Button, TextField, Tooltip, Drawer } from "@mui/material";
-import ReCAPTCHA from "react-google-recaptcha";
 import PhoneInput from "../components/PhoneInput";
 import UppyFileUploader from "../components/UppyFileUploader";
 import inputErrorsChecker from "../tools/inputErrorsChecker";
@@ -12,7 +12,17 @@ import { checkFaxLimit, addFaxLocalStorage, MAX_FREE_FAXES } from "../tools/chec
 import useAlertStore from "../store/useAlertStore";
 import checkNumberType from "../tools/checkNumberType";
 import featurePoints from "../utils/featurePoints";
-import StripeRootFax from "./StripeRootFax";
+
+// Dynamic imports for heavy components (loaded only when needed)
+const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), {
+  ssr: false,
+  loading: () => <div style={{ height: '78px' }}>Loading verification...</div>,
+});
+
+const StripeRootFax = dynamic(() => import("./StripeRootFax"), {
+  ssr: false,
+  loading: () => <div>Loading payment form...</div>,
+});
 
 export default function MainInputs() {
   // Usage of the Alert Store

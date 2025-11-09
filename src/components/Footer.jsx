@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../images/logo.png";
 
-export default function Footer() {
+function Footer() {
   return (
     <footer className="w-full bg-slate-200 mt-auto">
       <div className="px-4 mx-auto max-w-7xl">
@@ -95,3 +95,6 @@ export default function Footer() {
     </footer>
   );
 }
+
+// Memoize Footer to prevent unnecessary re-renders
+export default React.memo(Footer);

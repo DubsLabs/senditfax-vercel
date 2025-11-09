@@ -1,9 +1,19 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../images/logo.png";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import FaxCalculatorClient from "./FaxCalculatorClient";
+
+// Lazy load the calculator client component
+const FaxCalculatorClient = dynamic(() => import("./FaxCalculatorClient"), {
+  ssr: false, // Calculator has interactive sliders, no need for SSR
+  loading: () => (
+    <div style={{ minHeight: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <p>Loading calculator...</p>
+    </div>
+  ),
+});
 
 export const metadata = {
   title: "Fax Cost Calculator - How Much Does It Cost to Send a Fax? | SendItFax",

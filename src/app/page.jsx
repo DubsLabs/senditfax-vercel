@@ -1,11 +1,21 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Logo from "../images/logo.png";
 import MainInputs from "../components/MainInputs";
-import SEOContent from "../components/SEOContent";
-import Testimonials from "../components/Testimonials";
 import Image from "next/image";
 import AdSense from "@/components/AdSense";
+
+// Lazy load below-the-fold components
+const SEOContent = dynamic(() => import("../components/SEOContent"), {
+  ssr: true, // Keep SSR for SEO
+  loading: () => <div style={{ minHeight: '200px' }} />,
+});
+
+const Testimonials = dynamic(() => import("../components/Testimonials"), {
+  ssr: true, // Keep SSR for SEO
+  loading: () => <div style={{ minHeight: '400px' }} />,
+});
 
 export default function Main() {
   return (

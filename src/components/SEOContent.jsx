@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import Link from "next/link";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
@@ -29,7 +29,7 @@ function AccordionItem({ title, children, defaultOpen = false }) {
   );
 }
 
-export default function SEOContent() {
+function SEOContent() {
   return (
     <section className="w-full py-8 bg-white mt-8">
       <div className="max-w-4xl mx-auto px-4">
@@ -207,3 +207,6 @@ export default function SEOContent() {
     </section>
   );
 }
+
+// Memoize SEOContent to prevent unnecessary re-renders
+export default memo(SEOContent);

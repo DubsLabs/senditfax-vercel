@@ -1,9 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import tipMarks from "@/utils/tipMarks";
 import { Slider, Button, Drawer } from "@mui/material";
-import StripeRootTip from "@/components/StripeRootTip";
+
+// Dynamic import for Stripe component (loaded only when tip drawer is opened)
+const StripeRootTip = dynamic(() => import("@/components/StripeRootTip"), {
+  ssr: false,
+  loading: () => <div style={{ padding: '20px', textAlign: 'center' }}>Loading payment form...</div>,
+});
 
 export default function StatusInputs() {
   const [tipAmount, setTipAmount] = useState(8);
