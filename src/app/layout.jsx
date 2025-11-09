@@ -67,6 +67,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={roboto.className}>
       <head>
+        {/* Preconnect to external domains for faster loading */}
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        <link rel="dns-prefetch" href="https://js.stripe.com" />
+        
         <meta name="google-adsense-account" content="ca-pub-1688764604430717"></meta>
         <Script
           id="adsbygoogle-init"
