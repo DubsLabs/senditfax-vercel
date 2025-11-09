@@ -46,17 +46,17 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold text-gray-800 mb-3 text-sm">Resources</h3>
               <nav className="flex flex-col gap-2 text-sm">
-                <Link href="/calculator" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  Cost Calculator
-                </Link>
                 <Link href="/blog" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Blog
                 </Link>
-                <Link href="/how-to-send-fax-online" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  How to Send Fax Online
-                </Link>
                 <Link href="/status" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Check Fax Status
+                </Link>
+                <Link href="/calculator" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  Cost Calculator
+                </Link>
+                <Link href="/how-to-send-fax-online" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  How to Send Fax Online
                 </Link>
               </nav>
             </div>

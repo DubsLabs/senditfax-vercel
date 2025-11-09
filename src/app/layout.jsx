@@ -225,7 +225,7 @@ export default function RootLayout({ children }) {
                     "@type": "Person",
                     name: "Sarah Johnson"
                   },
-                  datePublished: "2025-01-15",
+                  datePublished: "2025-03-15",
                   reviewBody: "SendItFax saved my business! I needed to send urgent contracts to a client, and their service was incredibly fast and reliable. No registration hassle - just upload and send. Highly recommend!",
                   reviewRating: {
                     "@type": "Rating",
@@ -253,7 +253,7 @@ export default function RootLayout({ children }) {
                     "@type": "Person",
                     name: "Emily Rodriguez"
                   },
-                  datePublished: "2025-01-08",
+                  datePublished: "2025-07-08",
                   reviewBody: "As a medical office, we send multiple faxes daily. SendItFax's priority service is worth every penny - fast delivery, professional appearance, and reliable tracking. It's become our go-to solution.",
                   reviewRating: {
                     "@type": "Rating",

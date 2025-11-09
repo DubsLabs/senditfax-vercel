@@ -12,7 +12,7 @@ const testimonialsData = [
     location: "California, USA",
     rating: 5,
     text: "SendItFax saved my business! I needed to send urgent contracts to a client, and their service was incredibly fast and reliable. No registration hassle - just upload and send. Highly recommend!",
-    date: "January 2025"
+    date: "March 2025"
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const testimonialsData = [
     location: "Texas, USA",
     rating: 5,
     text: "As a medical office, we send multiple faxes daily. SendItFax's priority service is worth every penny - fast delivery, professional appearance, and reliable tracking. It's become our go-to solution.",
-    date: "January 2025"
+    date: "July 2025"
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const testimonialsData = [
     location: "Florida, USA",
     rating: 5,
     text: "I deal with contracts and documents all day. SendItFax makes faxing effortless - no more bulky fax machines or monthly subscriptions. The mobile experience is fantastic too!",
-    date: "December 2024"
+    date: "February 2025"
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ const testimonialsData = [
     location: "Vancouver, Canada",
     rating: 4,
     text: "SendItFax is a lifesaver for our law firm. We needed a quick solution when our fax machine broke. The service is secure, fast, and the delivery reports give us peace of mind for legal documents.",
-    date: "November 2024"
+    date: "September 2025"
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ const testimonialsData = [
     location: "New York, USA",
     rating: 5,
     text: "Tax season means sending hundreds of faxes. SendItFax's bulk capability and priority delivery ensure my clients' documents reach the IRS on time. Outstanding service!",
-    date: "January 2025"
+    date: "May 2025"
   }
 ];
 

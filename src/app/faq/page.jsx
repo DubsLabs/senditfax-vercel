@@ -1,16 +1,13 @@
 import FullSEO from "../../config/FullSEO";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import Script from "next/script";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../images/logo.png";
+import FAQAccordions from "./FAQAccordions";
+import PopularQuestions from "./PopularQuestions";
 
 import FAQList from "../../utils/FAQList";
-import { IoIosArrowDown } from "react-icons/io";
-import { v4 as uuidv4 } from "uuid";
 
 export const metadata = {
   ...FullSEO.FAQ,
@@ -98,55 +95,10 @@ export default function FAQ() {
         </div>
 
         {/* Popular Questions */}
-        <div className="mb-10">
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-600 p-6 rounded-r-lg">
-            <h2 className="text-xl font-semibold text-gray-800 mb-3">🔥 Most Popular Questions</h2>
-            <div className="space-y-2">
-              <a href="#getting-started" className="block text-blue-600 hover:underline">
-                → Do I need to create an account?
-              </a>
-              <a href="#pricing-&-plans" className="block text-blue-600 hover:underline">
-                → Is SendItFax really free?
-              </a>
-              <a href="#files-&-documents" className="block text-blue-600 hover:underline">
-                → What file types can I send?
-              </a>
-              <a href="#delivery-&-tracking" className="block text-blue-600 hover:underline">
-                → How long does fax delivery take?
-              </a>
-            </div>
-          </div>
-        </div>
+        <PopularQuestions />
 
         {/* FAQ Categories */}
-        {categories.map((category) => (
-          <div 
-            key={category} 
-            id={category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')} 
-            className="mb-10"
-          >
-            <h2 className="text-2xl font-bold mb-4 pb-2 border-b-2 border-blue-600">
-              {category}
-            </h2>
-            <div className="space-y-2">
-              {groupedFAQs[category]?.map((faq) => (
-                <Accordion key={uuidv4()} className="shadow-sm">
-                  <AccordionSummary 
-                    expandIcon={<IoIosArrowDown />}
-                    className="hover:bg-gray-50"
-                  >
-                    <span className="font-medium">{faq.question}</span>
-                  </AccordionSummary>
-                  <AccordionDetails className="bg-gray-50">
-                    <div style={{ whiteSpace: "pre-line" }} className="text-gray-700">
-                      {faq.text}
-                    </div>
-                  </AccordionDetails>
-                </Accordion>
-              ))}
-            </div>
-          </div>
-        ))}
+        <FAQAccordions categories={categories} groupedFAQs={groupedFAQs} />
 
         {/* Still Have Questions Section */}
         <div className="mt-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-8 text-center">
