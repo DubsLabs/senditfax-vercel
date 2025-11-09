@@ -5,9 +5,8 @@ import Image from "next/image";
 import Logo from "../../images/logo.png";
 import Breadcrumbs from "../../components/Breadcrumbs";
 
-// Lazy load the calculator client component
+// Lazy load the calculator client component (SSR enabled for SEO)
 const FaxCalculatorClient = dynamic(() => import("./FaxCalculatorClient"), {
-  ssr: false, // Calculator has interactive sliders, no need for SSR
   loading: () => (
     <div style={{ minHeight: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <p>Loading calculator...</p>
