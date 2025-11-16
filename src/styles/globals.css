@@ -160,18 +160,39 @@ main {
   padding: 0;
 }
 
-/* Quill editor styles */
-.ql-editor {
-  min-height: 300px;
+/* Draft.js editor styles */
+.blog-editor .rdw-editor-main {
+  min-height: 400px;
+  padding: 1rem;
 }
 
-.ql-editor.ql-blank::before {
-  color: #9ca3af;
-  font-style: normal;
+.blog-editor .rdw-editor-toolbar {
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.5rem;
+  background: #f9fafb;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
-.blog-editor .ql-container {
-  font-size: 16px;
+.blog-editor .rdw-option-wrapper,
+.blog-editor .rdw-dropdown-wrapper {
+  border: 1px solid #e5e7eb;
+  background: white;
+  margin: 0 2px;
+}
+
+.blog-editor .rdw-option-wrapper:hover,
+.blog-editor .rdw-dropdown-wrapper:hover {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.blog-editor .rdw-option-active {
+  background: #3b82f6;
+  color: white;
+}
+
+.blog-editor .public-DraftStyleDefault-block {
+  margin: 0.5em 0;
 }
 
 /* Line clamp utility */
