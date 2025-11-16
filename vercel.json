@@ -7,10 +7,17 @@
     {
       "source": "/blog/:path*",
       "destination": "https://blog.senditfax.com/:path*"
-    },
+    }
+  ],
+  "headers": [
     {
-      "source": "/:year/:month/:day/:slug",
-      "destination": "https://blog.senditfax.com/:year/:month/:day/:slug"
+      "source": "/blog/:path*",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
     }
   ]
 }
