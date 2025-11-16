@@ -7,9 +7,10 @@ import FullSEO from "@/config/FullSEO";
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  ...FullSEO.Blog,
+  title: "Test NextJS Blog - SendItFax",
+  description: "Test NextJS Blog with Firebase Firestore backend",
   alternates: {
-    canonical: "https://senditfax.com/blog",
+    canonical: "https://senditfax.com/nextjs-blog",
   },
 };
 
@@ -36,10 +37,10 @@ export default async function BlogPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <Breadcrumbs items={[{ label: "Blog", href: "/blog" }]} />
+      <Breadcrumbs items={[{ label: "Test NextJS Blog", href: "/nextjs-blog" }]} />
       
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">SendItFax Blog</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Test NextJS Blog</h1>
         <p className="text-lg text-gray-600">
           Tips, guides, and insights about online faxing, document management, and digital communication.
         </p>

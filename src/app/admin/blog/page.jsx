@@ -46,7 +46,7 @@ export default function AdminBlogPage() {
       const response = await fetch(`https://nextfaxapi-dlreibwmnq-uc.a.run.app/blogPosts/${slug}`, {
         method: "DELETE",
         headers: {
-          "X-Admin-Password": password,
+          "x-admin-password": password,
         },
       });
 
@@ -130,7 +130,7 @@ export default function AdminBlogPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <Link
-                        href={`/blog/${post.slug}`}
+                        href={`/nextjs-blog/${post.slug}`}
                         target="_blank"
                         className="text-blue-600 hover:text-blue-900 mr-4"
                       >

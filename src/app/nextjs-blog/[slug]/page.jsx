@@ -35,10 +35,10 @@ export async function generateMetadata({ params }) {
   }
   
   return {
-    title: `${post.title} - SendItFax Blog`,
+    title: `${post.title} - Test NextJS Blog`,
     description: post.description,
     alternates: {
-      canonical: `https://senditfax.com/blog/${post.slug}`,
+      canonical: `https://senditfax.com/nextjs-blog/${post.slug}`,
     },
     openGraph: {
       title: post.title,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }) {
           alt: post.title,
         }
       ] : [],
-      url: `https://senditfax.com/blog/${post.slug}`,
+      url: `https://senditfax.com/nextjs-blog/${post.slug}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -108,8 +108,8 @@ export default async function BlogPostPage({ params }) {
       <article className="max-w-4xl mx-auto px-4 py-8">
         <Breadcrumbs 
           items={[
-            { label: "Blog", href: "/blog" },
-            { label: post.title, href: `/blog/${post.slug}` }
+            { label: "Test NextJS Blog", href: "/nextjs-blog" },
+            { label: post.title, href: `/nextjs-blog/${post.slug}` }
           ]} 
         />
         
@@ -158,7 +158,7 @@ export default async function BlogPostPage({ params }) {
         <footer className="mt-12 pt-8 border-t border-gray-200">
           <div className="flex items-center justify-between">
             <Link 
-              href="/blog" 
+              href="/nextjs-blog" 
               className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -7,7 +7,11 @@ export async function POST(request) {
     // Check admin password
     const password = request.headers.get("x-admin-password");
     
+    console.log("Upload image - password received:", password ? "yes" : "no");
+    console.log("Upload image - env password:", process.env.BLOG_ADMIN_PASSWORD ? "yes" : "no");
+    
     if (!password || password !== process.env.BLOG_ADMIN_PASSWORD) {
+      console.log("Upload image - unauthorized");
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     

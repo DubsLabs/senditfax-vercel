@@ -82,7 +82,7 @@ export default function EditBlogPostPage({ params }) {
         const imageResponse = await fetch("/api/blog/upload-image", {
           method: "POST",
           headers: {
-            "X-Admin-Password": password,
+            "x-admin-password": password,
           },
           body: imageFormData,
         });
@@ -109,7 +109,7 @@ export default function EditBlogPostPage({ params }) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "X-Admin-Password": password,
+          "x-admin-password": password,
         },
         body: JSON.stringify(postData),
       });

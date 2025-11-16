@@ -49,6 +49,9 @@ function Footer() {
                 <Link href="/blog" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Blog
                 </Link>
+                <Link href="/nextjs-blog" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  Test NextJS Blog
+                </Link>
                 <Link href="/status" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Check Fax Status
                 </Link>
