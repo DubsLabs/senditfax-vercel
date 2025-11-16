@@ -3,6 +3,9 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import BlogPostCard from "@/components/BlogPostCard";
 import FullSEO from "@/config/FullSEO";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   ...FullSEO.Blog,
   alternates: {
@@ -13,7 +16,7 @@ export const metadata = {
 async function getBlogPosts() {
   try {
     const response = await fetch("https://nextfaxapi-dlreibwmnq-uc.a.run.app/blogPosts", {
-      cache: "no-store", // Always fetch fresh data for blog posts
+      cache: "no-cache",
     });
     
     if (!response.ok) {

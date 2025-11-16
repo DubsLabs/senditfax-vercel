@@ -4,10 +4,13 @@ import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Script from "next/script";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 async function getBlogPost(slug) {
   try {
     const response = await fetch(`https://nextfaxapi-dlreibwmnq-uc.a.run.app/blogPosts/${slug}`, {
-      cache: "no-store",
+      cache: "no-cache",
     });
     
     if (!response.ok) {
