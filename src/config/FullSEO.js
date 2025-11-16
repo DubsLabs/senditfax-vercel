@@ -29,6 +29,12 @@ const FullSEO = {
       "Review SendItFax terms of service. Understand your rights, prohibited uses, service availability, and legal agreements for using our free online fax service.",
     keywords: "senditfax terms, fax service agreement, terms of use, fax service conditions, legal terms",
   },
+  Blog: {
+    title: "SendItFax Blog - Faxing Tips, Guides & Industry Insights",
+    description:
+      "Discover tips, guides, and insights about online faxing, document management, and digital communication. Stay updated with the latest trends in fax technology.",
+    keywords: "online fax blog, faxing tips, document management, digital communication, fax guides, business communication",
+  },
 };
 
 export default FullSEO;
