@@ -54,7 +54,7 @@ export default function NewBlogPostPage() {
         const imageFormData = new FormData();
         imageFormData.append("image", image);
 
-        const imageResponse = await fetch("/api/blog/upload-image", {
+        const imageResponse = await fetch("https://nextfaxapi-dlreibwmnq-uc.a.run.app/blogUploadImage", {
           method: "POST",
           headers: {
             "x-admin-password": password,
@@ -63,7 +63,8 @@ export default function NewBlogPostPage() {
         });
 
         if (!imageResponse.ok) {
-          throw new Error("Failed to upload image");
+          const errorData = await imageResponse.json();
+          throw new Error(errorData.error || "Failed to upload image");
         }
 
         const imageData = await imageResponse.json();
