@@ -69,6 +69,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Preconnect to external domains for faster loading */}
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://js.stripe.com" />
         
@@ -95,6 +96,21 @@ export default function RootLayout({ children }) {
             })(window, document, "clarity", "script", "ooe85h8n1t");
           `}
         </Script>
+        
+        {/* Google Analytics 4 */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-DK1MGT41X5"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DK1MGT41X5');
+          `}
+        </Script>
+        
         <Script
           id="structured-data"
           type="application/ld+json"
