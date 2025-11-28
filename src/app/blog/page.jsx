@@ -49,7 +49,7 @@ export default async function BlogPage({ searchParams }) {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             {posts.map((post) => (
               <article
                 key={post.id}
@@ -62,7 +62,7 @@ export default async function BlogPage({ searchParams }) {
                       alt={post.title}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </Link>
                 )}

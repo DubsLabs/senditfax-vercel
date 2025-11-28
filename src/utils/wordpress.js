@@ -54,7 +54,7 @@ export async function getFeaturedImageUrl(mediaId) {
  */
 export async function getPosts(page = 1, perPage = 10) {
   try {
-    const fields = "id,slug,title,excerpt,featured_media,date,link";
+    const fields = "id,slug,title,excerpt,content,featured_media,date,link";
     const response = await fetch(
       `${WORDPRESS_API_URL}/posts?_fields=${fields}&page=${page}&per_page=${perPage}&_embed`,
       {
@@ -85,8 +85,8 @@ export async function getPosts(page = 1, perPage = 10) {
           featuredImageUrl = await getFeaturedImageUrl(post.featured_media);
         }
 
-        // Calculate reading time based on excerpt (if full content is not available)
-        const readingTime = calculateReadingTime(post.excerpt?.rendered || "");
+        // Calculate reading time based on full content for accurate reading time
+        const readingTime = calculateReadingTime(post.content?.rendered || "");
 
         return {
           id: post.id,
