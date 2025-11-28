@@ -25,14 +25,14 @@ export function calculateReadingTime(content) {
  * @param {number} mediaId - Image ID in WordPress
  * @returns {Promise<string|null>} - Image URL or null
  */
-export async function getFeaturedImageUrl(mediaId) {
+export async function getFeaturedImageUrl(mediaId, revalidateTime = 0) {
   if (!mediaId) return null;
 
   try {
     const response = await fetch(
       `${WORDPRESS_API_URL}/media/${mediaId}?_fields=source_url`,
       {
-        next: { revalidate: 0 }, // Always fresh data
+        next: { revalidate: revalidateTime },
       }
     );
 
@@ -82,7 +82,7 @@ export async function getPosts(page = 1, perPage = 10) {
 
         // If failed to get from _embedded, make separate request
         if (!featuredImageUrl && post.featured_media) {
-          featuredImageUrl = await getFeaturedImageUrl(post.featured_media);
+          featuredImageUrl = await getFeaturedImageUrl(post.featured_media, 0);
         }
 
         // Calculate reading time based on full content for accurate reading time
@@ -155,7 +155,7 @@ export async function getPostBySlug(slug, revalidateTime = 0) {
 
     // If failed, make separate request
     if (!featuredImageUrl && post.featured_media) {
-      featuredImageUrl = await getFeaturedImageUrl(post.featured_media);
+      featuredImageUrl = await getFeaturedImageUrl(post.featured_media, revalidateTime);
     }
 
     // Calculate reading time based on full content
@@ -234,7 +234,7 @@ export async function getRelatedPosts(currentPostId, limit = 3) {
           featuredImageUrl = post._embedded["wp:featuredmedia"][0].source_url || null;
         }
         if (!featuredImageUrl && post.featured_media) {
-          featuredImageUrl = await getFeaturedImageUrl(post.featured_media);
+          featuredImageUrl = await getFeaturedImageUrl(post.featured_media, 0);
         }
 
         return {
