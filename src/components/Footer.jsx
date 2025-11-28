@@ -9,7 +9,7 @@ function Footer() {
       <div className="px-4 mx-auto max-w-7xl">
         <div className="py-8">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-6">
             {/* Logo and Description */}
             <div className="md:col-span-1">
               <Link href="/" className="inline-block mb-3">
@@ -66,16 +66,16 @@ function Footer() {
                   How to Send Fax Online
                 </Link>
                 <Link href="/how-to-send-fax-for-doctors" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  For Doctors
+                  How to Send Fax Online for Doctors
                 </Link>
                 <Link href="/how-to-send-fax-for-lawyers" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  For Lawyers
+                  How to Send Fax Online for Lawyers
                 </Link>
                 <Link href="/how-to-send-fax-personal" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  Personal Use
+                  How to Send Fax Online for Personal Use
                 </Link>
                 <Link href="/how-to-send-fax-for-small-business" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  Small Business
+                  How to Send Fax Online for Small Business
                 </Link>
               </nav>
             </div>

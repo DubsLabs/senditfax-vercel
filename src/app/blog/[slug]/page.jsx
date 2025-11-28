@@ -4,9 +4,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import FullSEO from "../../../config/FullSEO";
-import { getPostBySlug, getAllPostSlugs } from "../../../utils/wordpress";
+import { getPostBySlug, getAllPostSlugs, getRelatedPosts, getPrevNextPosts } from "../../../utils/wordpress";
 import Script from "next/script";
 import { generateBreadcrumbSchema } from "../../../utils/breadcrumbSchema";
+import SocialShare from "../../../components/SocialShare";
+import ReadingProgress from "../../../components/ReadingProgress";
 
 export const dynamic = "force-dynamic"; // Always fresh data, no caching
 
@@ -84,19 +86,65 @@ export default async function BlogPostPage({ params }) {
 
   // Strip HTML from title for breadcrumb schema
   const postTitlePlain = post.title.replace(/<[^>]*>/g, '');
+  const postExcerptPlain = post.excerpt ? post.excerpt.replace(/<[^>]*>/g, '').substring(0, 160) : '';
+
+  // Get related posts and navigation
+  const [relatedPosts, navigation] = await Promise.all([
+    getRelatedPosts(post.id, 3),
+    getPrevNextPosts(post.id),
+  ]);
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { label: "Blog", href: "/blog" },
     { label: postTitlePlain, href: `/blog/${slug}` },
   ]);
 
+  // Article Schema for SEO
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: postTitlePlain,
+    description: postExcerptPlain,
+    image: post.featuredImage ? [post.featuredImage] : [],
+    datePublished: post.date,
+    dateModified: post.modified || post.date,
+    author: {
+      "@type": "Organization",
+      name: "SendItFax",
+      url: "https://senditfax.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "SendItFax",
+      url: "https://senditfax.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://senditfax.com/og-meta-senditfax.jpg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://senditfax.com/blog/${slug}`,
+    },
+  };
+
+  const postUrl = `https://senditfax.com/blog/${slug}`;
+
   return (
     <>
+      <ReadingProgress />
       <Script
         id="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <Script
+        id="article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema),
         }}
       />
       <article className="max-w-4xl mx-auto px-4 py-8">
@@ -188,7 +236,95 @@ export default async function BlogPostPage({ params }) {
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 
-      <div className="mt-12 pt-8 border-t border-gray-200">
+      {/* Social Share */}
+      <SocialShare title={post.title} url={postUrl} />
+
+      {/* Prev/Next Navigation */}
+      {(navigation.prev || navigation.next) && (
+        <nav className="mt-8 pt-8 border-t border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {navigation.prev ? (
+              <Link
+                href={`/blog/${navigation.prev.slug}`}
+                className="group p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
+              >
+                <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Previous Post
+                </div>
+                <div className="font-medium text-gray-900 group-hover:text-blue-600 line-clamp-2" dangerouslySetInnerHTML={{ __html: navigation.prev.title }} />
+              </Link>
+            ) : (
+              <div></div>
+            )}
+            {navigation.next ? (
+              <Link
+                href={`/blog/${navigation.next.slug}`}
+                className="group p-4 border border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-right md:text-left"
+              >
+                <div className="flex items-center justify-end md:justify-start gap-2 text-sm text-gray-500 mb-2">
+                  Next Post
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                <div className="font-medium text-gray-900 group-hover:text-blue-600 line-clamp-2" dangerouslySetInnerHTML={{ __html: navigation.next.title }} />
+              </Link>
+            ) : null}
+          </div>
+        </nav>
+      )}
+
+      {/* Related Posts */}
+      {relatedPosts.length > 0 && (
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Posts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedPosts.map((relatedPost) => (
+              <Link
+                key={relatedPost.id}
+                href={`/blog/${relatedPost.slug}`}
+                className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
+              >
+                {relatedPost.featuredImage && (
+                  <div className="relative w-full h-40 overflow-hidden">
+                    <Image
+                      src={relatedPost.featuredImage}
+                      alt={relatedPost.title.replace(/<[^>]*>/g, '')}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                )}
+                <div className="p-4 flex flex-col flex-grow">
+                  <h3
+                    className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors"
+                    dangerouslySetInnerHTML={{ __html: relatedPost.title }}
+                  />
+                  <div
+                    className="text-gray-600 text-sm mb-3 line-clamp-2 flex-grow"
+                    dangerouslySetInnerHTML={{
+                      __html: relatedPost.excerpt.replace(/<[^>]*>/g, '').substring(0, 100) + '...',
+                    }}
+                  />
+                  <span className="text-blue-600 hover:text-blue-700 font-medium text-sm inline-flex items-center gap-1 mt-auto">
+                    Read more
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Back to Blog */}
+      <div className="mt-8 pt-8 border-t border-gray-200">
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"

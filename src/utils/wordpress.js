@@ -204,3 +204,92 @@ export async function getAllPostSlugs() {
   }
 }
 
+/**
+ * Gets related posts (excluding current post)
+ * @param {number} currentPostId - Current post ID to exclude
+ * @param {number} limit - Number of related posts to return
+ * @returns {Promise<Array>} - Array of related posts
+ */
+export async function getRelatedPosts(currentPostId, limit = 3) {
+  try {
+    const fields = "id,slug,title,excerpt,featured_media,date";
+    const response = await fetch(
+      `${WORDPRESS_API_URL}/posts?_fields=${fields}&exclude=${currentPostId}&per_page=${limit}&_embed`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`WordPress API error: ${response.status}`);
+    }
+
+    const posts = await response.json();
+    
+    const processedPosts = await Promise.all(
+      posts.map(async (post) => {
+        let featuredImageUrl = null;
+        if (post._embedded && post._embedded["wp:featuredmedia"] && post._embedded["wp:featuredmedia"][0]) {
+          featuredImageUrl = post._embedded["wp:featuredmedia"][0].source_url || null;
+        }
+        if (!featuredImageUrl && post.featured_media) {
+          featuredImageUrl = await getFeaturedImageUrl(post.featured_media);
+        }
+
+        return {
+          id: post.id,
+          slug: post.slug,
+          title: post.title?.rendered || "",
+          excerpt: post.excerpt?.rendered || "",
+          featuredImage: featuredImageUrl,
+          date: post.date,
+        };
+      })
+    );
+
+    return processedPosts;
+  } catch (error) {
+    console.error("Error fetching related posts:", error);
+    return [];
+  }
+}
+
+/**
+ * Gets previous and next posts for navigation
+ * @param {number} currentPostId - Current post ID
+ * @returns {Promise<{prev: Object|null, next: Object|null}>}
+ */
+export async function getPrevNextPosts(currentPostId) {
+  try {
+    // Get all posts to find neighbors
+    const response = await fetch(
+      `${WORDPRESS_API_URL}/posts?_fields=id,slug,title&orderby=date&order=desc&per_page=100`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`WordPress API error: ${response.status}`);
+    }
+
+    const posts = await response.json();
+    const currentIndex = posts.findIndex((post) => post.id === currentPostId);
+
+    if (currentIndex === -1) {
+      return { prev: null, next: null };
+    }
+
+    const prevPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+    const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+
+    return {
+      prev: prevPost ? { slug: prevPost.slug, title: prevPost.title?.rendered || "" } : null,
+      next: nextPost ? { slug: nextPost.slug, title: nextPost.title?.rendered || "" } : null,
+    };
+  } catch (error) {
+    console.error("Error fetching prev/next posts:", error);
+    return { prev: null, next: null };
+  }
+}
+
