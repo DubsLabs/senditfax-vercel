@@ -34,7 +34,7 @@ export default function PhoneInput({
     onChange: (data) => {
       // If onlyNorthAmerica is true, enforce +1 country code
       if (onlyNorthAmerica && !data.phone.startsWith("+1")) {
-        return; // Просто ігноруємо зміну, але не викликаємо onChange
+        return; // Simply ignore the change, but don't call onChange
       }
 
       const isCode = data.phone.match(/^\+1(\d{3})/);
@@ -43,7 +43,7 @@ export default function PhoneInput({
         const areaCode = Number(isCode[1]);
         const stateElement = areaCodeList.find((el) => el.areaCode.includes(areaCode));
 
-        // Уникаємо зайвого ререндеру, змінюючи стан тільки якщо необхідно
+        // Avoid unnecessary re-renders, only change state if necessary
         if (stateElement && stateElement.country.toLowerCase() !== country.iso2) {
           setTimeout(() => setCountry(stateElement.country.toLowerCase()), 0);
         }

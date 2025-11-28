@@ -80,7 +80,7 @@ const AdSense = ({ slotKey, format, responsive = true, style = {} }) => {
     );
   }
 
-  // Спочатку повертаємо порожній div для SSR, щоб уникнути помилок гідратації
+  // First return empty div for SSR to avoid hydration errors
   if (!isMounted) {
     return <div className="ad-container" style={style}></div>;
   }
