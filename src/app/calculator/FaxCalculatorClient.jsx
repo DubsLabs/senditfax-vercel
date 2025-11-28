@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Slider, TextField } from "@mui/material";
+import Slider from "@mui/material/Slider";
+import TextField from "@mui/material/TextField";
 import { FaCalculator, FaCheckCircle, FaArrowRight } from "react-icons/fa";
 
 export default function FaxCalculatorClient() {

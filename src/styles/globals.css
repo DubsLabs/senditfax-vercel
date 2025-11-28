@@ -77,3 +77,30 @@ main {
 .shadow-custom {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+/* Screen reader only - for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus visible styles for better keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #1878f3;
+  outline-offset: 2px;
+}
+
+/* Skip link focus styles */
+.skip-link:focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}

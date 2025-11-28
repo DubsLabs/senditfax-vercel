@@ -5,7 +5,7 @@ import Logo from "../images/logo.png";
 
 function Footer() {
   return (
-    <footer className="w-full bg-slate-200 mt-auto">
+    <footer id="footer" className="w-full bg-slate-200 mt-auto" role="contentinfo">
       <div className="px-4 mx-auto max-w-7xl">
         <div className="py-8">
           {/* Main Footer Content */}
@@ -27,9 +27,9 @@ function Footer() {
             </div>
 
             {/* Quick Links */}
-            <div>
+            <nav aria-label="Quick links">
               <h3 className="font-semibold text-gray-800 mb-3 text-sm">Quick Links</h3>
-              <nav className="flex flex-col gap-2 text-sm">
+              <div className="flex flex-col gap-2 text-sm">
                 <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Home
                 </Link>
@@ -39,13 +39,13 @@ function Footer() {
                 <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors">
                   About Us
                 </Link>
-              </nav>
-            </div>
+              </div>
+            </nav>
 
             {/* Resources */}
-            <div>
+            <nav aria-label="Resources">
               <h3 className="font-semibold text-gray-800 mb-3 text-sm">Resources</h3>
-              <nav className="flex flex-col gap-2 text-sm">
+              <div className="flex flex-col gap-2 text-sm">
                 <Link href="/blog" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Blog
                 </Link>
@@ -55,13 +55,13 @@ function Footer() {
                 <Link href="/calculator" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Cost Calculator
                 </Link>
-              </nav>
-            </div>
+              </div>
+            </nav>
 
             {/* How to Send Fax Online - Separate Column */}
-            <div>
+            <nav aria-label="Guides">
               <h3 className="font-semibold text-gray-800 mb-3 text-sm">Guides</h3>
-              <nav className="flex flex-col gap-2 text-sm">
+              <div className="flex flex-col gap-2 text-sm">
                 <Link href="/how-to-send-fax-online" className="text-gray-600 hover:text-blue-600 transition-colors">
                   How to Send Fax Online
                 </Link>
@@ -77,21 +77,21 @@ function Footer() {
                 <Link href="/how-to-send-fax-for-small-business" className="text-gray-600 hover:text-blue-600 transition-colors">
                   How to Send Fax Online for Small Business
                 </Link>
-              </nav>
-            </div>
+              </div>
+            </nav>
 
             {/* Legal */}
-            <div>
+            <nav aria-label="Legal">
               <h3 className="font-semibold text-gray-800 mb-3 text-sm">Legal</h3>
-              <nav className="flex flex-col gap-2 text-sm">
+              <div className="flex flex-col gap-2 text-sm">
                 <Link href="/terms" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Terms of Use
                 </Link>
                 <Link href="/privacy" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Privacy Policy
                 </Link>
-              </nav>
-            </div>
+              </div>
+            </nav>
           </div>
 
           {/* Bottom Bar */}

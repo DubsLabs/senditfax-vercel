@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button, CircularProgress } from "@mui/material";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 import { FaRegCheckCircle } from "react-icons/fa";
 import useAlertStore from "../store/useAlertStore";

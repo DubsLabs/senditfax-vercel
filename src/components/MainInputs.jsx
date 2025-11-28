@@ -3,10 +3,14 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
-import { Button, TextField, Tooltip, Drawer } from "@mui/material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import Drawer from "@mui/material/Drawer";
 import PhoneInput from "../components/PhoneInput";
 import UppyFileUploader from "../components/UppyFileUploader";
 import inputErrorsChecker from "../tools/inputErrorsChecker";
+// Optimized icon import - only import what we need
 import { FaArrowRight } from "react-icons/fa6";
 import { checkFaxLimit, addFaxLocalStorage, MAX_FREE_FAXES } from "../tools/checkFaxLimit";
 import useAlertStore from "../store/useAlertStore";
@@ -164,7 +168,16 @@ export default function MainInputs() {
             error={inputErrors.senderName.hasError}
             helperText={inputErrors.senderName.hasError ? "Please enter your name." : <>{"\u00a0"}</>}
             onBlur={(e) => inputErrorsChecker("senderName", e.target.value, setInputErrors)}
+            aria-required="true"
+            aria-invalid={inputErrors.senderName.hasError}
+            aria-describedby={inputErrors.senderName.hasError ? "sender-name-error" : undefined}
+            id="sender-name"
           />
+          {inputErrors.senderName.hasError && (
+            <span id="sender-name-error" className="sr-only" role="alert">
+              Please enter your name.
+            </span>
+          )}
 
           <TextField
             size="small"
@@ -180,6 +193,7 @@ export default function MainInputs() {
             value={sendCompany}
             onChange={(e) => setSendCompany(e.target.value)}
             helperText={<>{"\u00a0"}</>}
+            aria-label="Sender company (optional)"
           />
 
           <TextField
@@ -193,13 +207,24 @@ export default function MainInputs() {
             className="w-full"
             label="Email"
             variant="outlined"
+            type="email"
             value={sendEmail}
             required
             onChange={(e) => setSendEmail(e.target.value)}
             error={inputErrors.senderEmail.hasError}
             helperText={inputErrors.senderEmail.hasError ? "Please enter your email." : <>{"\u00a0"}</>}
             onBlur={(e) => inputErrorsChecker("senderEmail", e.target.value, setInputErrors)}
+            aria-required="true"
+            aria-invalid={inputErrors.senderEmail.hasError}
+            aria-describedby={inputErrors.senderEmail.hasError ? "sender-email-error" : undefined}
+            id="sender-email"
+            autoComplete="email"
           />
+          {inputErrors.senderEmail.hasError && (
+            <span id="sender-email-error" className="sr-only" role="alert">
+              Please enter a valid email address.
+            </span>
+          )}
 
           <PhoneInput
             className="w-full"
@@ -208,7 +233,16 @@ export default function MainInputs() {
             error={inputErrors.senderPhone.hasError}
             helperText={inputErrors.senderPhone.hasError ? "Please enter your valid phone." : <>{"\u00a0"}</>}
             onBlur={(e) => inputErrorsChecker("senderPhone", e.target.value, setInputErrors)}
+            aria-required="true"
+            aria-invalid={inputErrors.senderPhone.hasError}
+            aria-describedby={inputErrors.senderPhone.hasError ? "sender-phone-error" : undefined}
+            id="sender-phone"
           />
+          {inputErrors.senderPhone.hasError && (
+            <span id="sender-phone-error" className="sr-only" role="alert">
+              Please enter a valid phone number.
+            </span>
+          )}
         </div>
         <div className="flex flex-col items-center w-full gap-1 input-info-new bg-white rounded-lg shadow-sm border border-gray-200 p-4">
           <div className="text-base font-semibold text-center border-b-2 border-b-[#1878f3] mb-4 pb-2 border-solid cursor-default w-full" role="heading" aria-level="2">RECEIVER INFORMATION</div>
@@ -230,7 +264,16 @@ export default function MainInputs() {
             error={inputErrors.receiverName.hasError}
             helperText={inputErrors.receiverName.hasError ? "Please enter your name." : <>{"\u00a0"}</>}
             onBlur={(e) => inputErrorsChecker("receiverName", e.target.value, setInputErrors)}
+            aria-required="true"
+            aria-invalid={inputErrors.receiverName.hasError}
+            aria-describedby={inputErrors.receiverName.hasError ? "receiver-name-error" : undefined}
+            id="receiver-name"
           />
+          {inputErrors.receiverName.hasError && (
+            <span id="receiver-name-error" className="sr-only" role="alert">
+              Please enter receiver name.
+            </span>
+          )}
 
           <TextField
             size="small"
@@ -246,6 +289,7 @@ export default function MainInputs() {
             value={receiveCompany}
             onChange={(e) => setReceiveCompany(e.target.value)}
             helperText={<>{"\u00a0"}</>}
+            aria-label="Receiver company (optional)"
           />
 
           <PhoneInput
@@ -258,7 +302,16 @@ export default function MainInputs() {
             onBlur={(e) => inputErrorsChecker("receiverFax", e.target.value, setInputErrors)}
             countryCodeEditable={false}
             onlyNorthAmerica={true}
+            aria-required="true"
+            aria-invalid={inputErrors.receiverFax.hasError}
+            aria-describedby={inputErrors.receiverFax.hasError ? "receiver-fax-error" : undefined}
+            id="receiver-fax"
           />
+          {inputErrors.receiverFax.hasError && (
+            <span id="receiver-fax-error" className="sr-only" role="alert">
+              Please enter a valid US or Canadian fax number.
+            </span>
+          )}
         </div>
       </div>
 
@@ -288,7 +341,12 @@ export default function MainInputs() {
             value={isCoverPageRemoved ? "" : textArea}
             onChange={(e) => setTextArea(e.target.value)}
             disabled={isCoverPageRemoved}
+            aria-label="Cover page text (optional)"
+            aria-describedby="cover-page-description"
           />
+          <span id="cover-page-description" className="sr-only">
+            Optional text that will appear on the cover page. Maximum 500 characters.
+          </span>
 
           <div className="flex items-center justify-center text-sm">
             <input
@@ -298,24 +356,34 @@ export default function MainInputs() {
               id="checkbox_id"
               defaultChecked={isCoverPageRemoved}
               onChange={(e) => setIsCoverPageRemoved(e.target.checked)}
+              aria-describedby="checkbox-description"
             />
-            <label htmlFor="checkbox_id">Remove Cover Page (only Paid Faxes)</label>
+            <label htmlFor="checkbox_id" className="cursor-pointer">
+              Remove Cover Page (only Paid Faxes)
+            </label>
+            <span id="checkbox-description" className="sr-only">
+              Check this box to remove the cover page. Only available for paid faxes ($1.99).
+            </span>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-center w-full overflow-x-auto p-5">
-        <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY} onChange={(val) => setCaptchaValue(val)} />
+      <div className="flex justify-center w-full overflow-x-auto p-5" role="group" aria-label="Security verification">
+        <ReCAPTCHA
+          sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}
+          onChange={(val) => setCaptchaValue(val)}
+          aria-label="Complete reCAPTCHA verification"
+        />
       </div>
 
       <div className="flex flex-col justify-between w-full gap-6 text-sm md:flex-row md:gap-8">
         <div className="flex flex-col w-full gap-3 cursor-default bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
           <div className="text-base font-semibold border-b border-gray-200 pb-2" role="heading" aria-level="2">FREE FAX</div>
 
-          <ul className="text-left">
+          <ul className="text-left" aria-label="Free fax features">
             {featurePoints["Free"].map((el, i) => (
               <li key={i} className="flex items-center">
-                <FaArrowRight className="mr-2 text-blue-600" size={12} /> {el}
+                <FaArrowRight className="mr-2 text-blue-600" size={12} aria-hidden="true" /> <span>{el}</span>
               </li>
             ))}
           </ul>
@@ -340,6 +408,10 @@ export default function MainInputs() {
                   borderRadius: "8px",
                   "&:hover": {
                     backgroundColor: "#1565c0",
+                  },
+                  "&:disabled": {
+                    backgroundColor: "#9e9e9e",
+                    color: "#fff",
                   }
                 }}
                 disabled={totalPages > 3 || isCoverPageRemoved}
@@ -352,6 +424,7 @@ export default function MainInputs() {
 
                   sendFaxHandler(false);
                 }}
+                aria-label={totalPages > 3 ? "Cannot send free fax: exceeds 3 page limit" : isCoverPageRemoved ? "Cannot send free fax: cover page removal only available for paid faxes" : "Send free fax now"}
               >
                 SEND FREE FAX NOW
               </Button>
@@ -362,10 +435,10 @@ export default function MainInputs() {
         <div className="flex flex-col w-full gap-3 cursor-default bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
           <div className="text-base font-semibold border-b border-gray-200 pb-2" role="heading" aria-level="2">ALMOST FREE FAX</div>
 
-          <ul className="text-left">
+          <ul className="text-left" aria-label="Paid fax features">
             {featurePoints["Paid"].map((el, i) => (
               <li key={i} className="flex items-center">
-                <FaArrowRight className="mr-2 text-blue-600" size={12} /> {el}
+                <FaArrowRight className="mr-2 text-blue-600" size={12} aria-hidden="true" /> <span>{el}</span>
               </li>
             ))}
           </ul>
@@ -385,6 +458,7 @@ export default function MainInputs() {
                     backgroundColor: "#1565c0",
                   }
                 }}
+                aria-label="Send paid fax for $1.99"
               >
                 SEND $1.99 FAX NOW
               </Button>
@@ -493,7 +567,14 @@ export default function MainInputs() {
         </div>
       )}
 
-      <Drawer anchor="right" size="md" open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
+      <Drawer
+        anchor="right"
+        size="md"
+        open={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        aria-labelledby="payment-drawer-title"
+        aria-modal="true"
+      >
         <StripeRootFax
           setIsSidebarOpen={setIsSidebarOpen}
           formDataObject={{

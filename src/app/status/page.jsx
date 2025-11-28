@@ -6,7 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../images/logo.png";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import { Button, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import Script from "next/script";
 import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 

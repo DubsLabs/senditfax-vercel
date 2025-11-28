@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import FullSEO from "../config/FullSEO";
 import Alerts from "@/components/Alerts";
 import ScrollToTop from "@/components/ScrollToTop";
+import SkipLinks from "@/components/SkipLinks";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Cookie from "@/components/Cookie";
 import { Roboto } from "next/font/google";
@@ -76,7 +77,7 @@ export default function RootLayout({ children }) {
         <meta name="google-adsense-account" content="ca-pub-1688764604430717"></meta>
         <Script
           id="adsbygoogle-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${AdSenseConfig.client}`}
           crossOrigin="anonymous"
         />
@@ -291,10 +292,13 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <AppRouterCacheProvider>
+          <SkipLinks />
           <div id="root" className="flex flex-col min-h-screen">
             <ScrollToTop />
             {/* <Header /> */}
-            <main className="flex-grow w-full flex flex-col">{children}</main>
+            <main id="main-content" className="flex-grow w-full flex flex-col" role="main" tabIndex={-1}>
+              {children}
+            </main>
             <Alerts />
             <Cookie />
             <Footer />

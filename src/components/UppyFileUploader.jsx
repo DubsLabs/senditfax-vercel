@@ -105,14 +105,18 @@ export default function UppyFileUploader({ uppyFiles, setUppyFiles, totalPages, 
               <p>
                 {file.name} ({file.pages} Pages)
               </p>
-              <TiDelete
-                className="text-[#f44336] w-5 h-5 cursor-pointer flex-shrink-0"
+              <button
+                type="button"
+                className="text-[#f44336] w-5 h-5 cursor-pointer flex-shrink-0 bg-transparent border-none p-0"
                 onClick={() => {
                   uppy.removeFile(file.id);
                   setUppyFiles((files) => files.filter((el) => el.uniqueId !== file.uniqueId));
                   setTotalPages((prev) => prev - file.pages);
                 }}
-              />
+                aria-label={`Remove file ${file.name}`}
+              >
+                <TiDelete className="w-full h-full" aria-hidden="true" />
+              </button>
             </div>
           ))}
         </div>

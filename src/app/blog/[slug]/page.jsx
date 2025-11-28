@@ -202,10 +202,11 @@ export default async function BlogPostPage({ params }) {
           <div className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden mb-8">
             <Image
               src={post.featuredImage}
-              alt={post.title}
+              alt={post.title.replace(/<[^>]*>/g, '')}
               fill
               className="object-cover"
               priority
+              fetchPriority="high"
               sizes="(max-width: 768px) 100vw, 896px"
             />
           </div>

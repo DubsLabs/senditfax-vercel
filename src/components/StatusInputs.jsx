@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import tipMarks from "@/utils/tipMarks";
-import { Slider, Button, Drawer } from "@mui/material";
+import Slider from "@mui/material/Slider";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
 
 // Dynamic import for Stripe component (loaded only when tip drawer is opened)
 const StripeRootTip = dynamic(() => import("@/components/StripeRootTip"), {
@@ -43,7 +45,14 @@ export default function StatusInputs() {
         </Button>
       </div>
 
-      <Drawer anchor="right" size="md" open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)}>
+      <Drawer
+        anchor="right"
+        size="md"
+        open={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        aria-labelledby="tip-drawer-title"
+        aria-modal="true"
+      >
         <StripeRootTip setIsSidebarOpen={setIsSidebarOpen} tipAmount={tipAmount} />
       </Drawer>
     </>

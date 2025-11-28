@@ -4,7 +4,11 @@ import React, { useState } from "react";
 import "react-international-phone/style.css";
 
 import areaCodeList from "@/utils/areaCodeList";
-import { InputAdornment, MenuItem, Select, TextField, Typography } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import { defaultCountries, FlagImage, parseCountry, usePhoneInput } from "react-international-phone";
 
 export default function PhoneInput({
@@ -83,6 +87,9 @@ export default function PhoneInput({
       error={error}
       helperText={helperText}
       size="small"
+      aria-required={restProps['aria-required'] !== undefined ? restProps['aria-required'] : true}
+      aria-invalid={restProps['aria-invalid'] !== undefined ? restProps['aria-invalid'] : error}
+      aria-describedby={restProps['aria-describedby']}
       sx={{
         fontSize: "14px",
         "& .MuiInputBase-input": {
