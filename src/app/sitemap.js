@@ -1,5 +1,8 @@
 import { getAllPostSlugs, getPostBySlug } from '../utils/wordpress';
 
+// Enable ISR for sitemap - revalidate every hour
+export const revalidate = 3600; // 1 hour
+
 export default async function sitemap() {
   const baseUrl = 'https://senditfax.com';
 
@@ -88,11 +91,13 @@ export default async function sitemap() {
   // Get blog posts dynamically
   let blogPosts = [];
   try {
-    const slugs = await getAllPostSlugs();
+    // Use revalidate: 3600 for sitemap to allow static generation
+    const slugs = await getAllPostSlugs(3600);
     const postsData = await Promise.all(
       slugs.map(async (slug) => {
         try {
-          const post = await getPostBySlug(slug);
+          // Use revalidate: 3600 for sitemap to allow static generation
+          const post = await getPostBySlug(slug, 3600);
           if (post) {
             return {
               url: `${baseUrl}/blog/${slug}`,

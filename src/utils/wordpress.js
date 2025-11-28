@@ -123,13 +123,13 @@ export async function getPosts(page = 1, perPage = 10) {
  * @param {string} slug - Post slug
  * @returns {Promise<Object|null>} - Post data or null
  */
-export async function getPostBySlug(slug) {
+export async function getPostBySlug(slug, revalidateTime = 0) {
   try {
     const fields = "id,slug,title,content,excerpt,featured_media,date,modified";
     const response = await fetch(
       `${WORDPRESS_API_URL}/posts?slug=${slug}&_fields=${fields}&_embed`,
       {
-        next: { revalidate: 0 }, // Always fresh data
+        next: { revalidate: revalidateTime },
       }
     );
 
@@ -181,14 +181,15 @@ export async function getPostBySlug(slug) {
 
 /**
  * Gets all post slugs for static path generation
+ * @param {number} revalidateTime - Revalidation time in seconds (default: 3600 for sitemap)
  * @returns {Promise<Array<string>>} - Array of slugs
  */
-export async function getAllPostSlugs() {
+export async function getAllPostSlugs(revalidateTime = 3600) {
   try {
     const response = await fetch(
       `${WORDPRESS_API_URL}/posts?_fields=slug&per_page=100`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: revalidateTime },
       }
     );
 
