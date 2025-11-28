@@ -9,7 +9,7 @@ function Footer() {
       <div className="px-4 mx-auto max-w-7xl">
         <div className="py-8">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 mb-6">
             {/* Logo and Description */}
             <div className="md:col-span-1">
               <Link href="/" className="inline-block mb-3">
@@ -55,8 +55,27 @@ function Footer() {
                 <Link href="/calculator" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Cost Calculator
                 </Link>
+              </nav>
+            </div>
+
+            {/* How to Send Fax Online - Separate Column */}
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-3 text-sm">Guides</h3>
+              <nav className="flex flex-col gap-2 text-sm">
                 <Link href="/how-to-send-fax-online" className="text-gray-600 hover:text-blue-600 transition-colors">
                   How to Send Fax Online
+                </Link>
+                <Link href="/how-to-send-fax-for-doctors" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  For Doctors
+                </Link>
+                <Link href="/how-to-send-fax-for-lawyers" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  For Lawyers
+                </Link>
+                <Link href="/how-to-send-fax-personal" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  Personal Use
+                </Link>
+                <Link href="/how-to-send-fax-for-small-business" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  Small Business
                 </Link>
               </nav>
             </div>

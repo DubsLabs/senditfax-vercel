@@ -3,6 +3,8 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../images/logo.png";
+import Script from "next/script";
+import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 
 export const metadata = { 
   ...FullSEO.About,
@@ -12,9 +14,19 @@ export const metadata = {
 };
 
 export default function About() {
+  const breadcrumbSchema = generateBreadcrumbSchema([{ label: "About Us", href: "/about" }]);
+
   return (
-    <section className="max-w-4xl mx-auto px-4 py-8">
-      <Breadcrumbs items={[{ label: "About Us", href: "/about" }]} />
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <section className="max-w-4xl mx-auto px-4 py-8">
+        <Breadcrumbs items={[{ label: "About Us", href: "/about" }]} />
       
       <div className="mb-8 flex flex-col items-center w-full gap-4">
         <Link href="/">
@@ -154,5 +166,6 @@ export default function About() {
         </p>
       </article>
     </section>
+    </>
   );
 }

@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import FullSEO from "../../../config/FullSEO";
 import { getPostBySlug, getAllPostSlugs } from "../../../utils/wordpress";
+import Script from "next/script";
+import { generateBreadcrumbSchema } from "../../../utils/breadcrumbSchema";
 
 export const dynamic = "force-dynamic"; // Always fresh data, no caching
 
@@ -80,14 +82,30 @@ export default async function BlogPostPage({ params }) {
     notFound();
   }
 
+  // Strip HTML from title for breadcrumb schema
+  const postTitlePlain = post.title.replace(/<[^>]*>/g, '');
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Blog", href: "/blog" },
+    { label: postTitlePlain, href: `/blog/${slug}` },
+  ]);
+
   return (
-    <article className="max-w-4xl mx-auto px-4 py-8">
-      <Breadcrumbs
-        items={[
-          { label: "Blog", href: "/blog" },
-          { label: post.title, href: `/blog/${slug}` },
-        ]}
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
       />
+      <article className="max-w-4xl mx-auto px-4 py-8">
+        <Breadcrumbs
+          items={[
+            { label: "Blog", href: "/blog" },
+            { label: post.title, href: `/blog/${slug}` },
+          ]}
+        />
 
       <header className="mb-8">
         <h1
@@ -192,6 +210,7 @@ export default async function BlogPostPage({ params }) {
         </Link>
       </div>
     </article>
+    </>
   );
 }
 

@@ -5,6 +5,8 @@ import Logo from "../images/logo.png";
 import MainInputs from "../components/MainInputs";
 import Image from "next/image";
 import AdSense from "@/components/AdSense";
+import Script from "next/script";
+import { generateBreadcrumbSchema } from "../utils/breadcrumbSchema";
 
 // Lazy load below-the-fold components
 const SEOContent = dynamic(() => import("../components/SEOContent"), {
@@ -18,8 +20,18 @@ const Testimonials = dynamic(() => import("../components/Testimonials"), {
 });
 
 export default function Main() {
+  const breadcrumbSchema = generateBreadcrumbSchema([]);
+
   return (
-    <div className="flex flex-col w-full">
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <div className="flex flex-col w-full">
       <section className="flex flex-col items-center w-full gap-5 px-4 mx-auto max-w-7xl">
         <header className="flex flex-col items-center w-full gap-4 text-sm">
           <Image
@@ -82,5 +94,6 @@ export default function Main() {
       {/* Testimonials Section */}
       <Testimonials />
     </div>
+    </>
   );
 }

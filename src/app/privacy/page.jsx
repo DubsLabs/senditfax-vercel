@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../images/logo.png";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import Script from "next/script";
+import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 
 export const metadata = { 
   ...FullSEO.Privacy,
@@ -12,9 +14,21 @@ export const metadata = {
 };
 
 export default function Privacy() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Privacy Policy", href: "/privacy" }
+  ]);
+
   return (
-    <section className="max-w-4xl mx-auto px-4 py-8 md:px-8">
-      <Breadcrumbs items={[{ label: "Privacy Policy", href: "/privacy" }]} />
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <section className="max-w-4xl mx-auto px-4 py-8 md:px-8">
+        <Breadcrumbs items={[{ label: "Privacy Policy", href: "/privacy" }]} />
       
       <div className="mb-8 flex flex-col items-center w-full gap-4 text-sm">
         <Link href="/">
@@ -234,5 +248,6 @@ export default function Privacy() {
         </div>
       </div>
     </section>
+    </>
   );
 }

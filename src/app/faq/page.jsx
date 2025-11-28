@@ -6,6 +6,7 @@ import Image from "next/image";
 import Logo from "../../images/logo.png";
 import FAQAccordions from "./FAQAccordions";
 import PopularQuestions from "./PopularQuestions";
+import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 
 import FAQList from "../../utils/FAQList";
 
@@ -17,6 +18,8 @@ export const metadata = {
 };
 
 export default function FAQ() {
+  const breadcrumbSchema = generateBreadcrumbSchema([{ label: "FAQ", href: "/faq" }]);
+
   // Generate FAQ Schema
   const faqSchema = {
     "@context": "https://schema.org",
@@ -50,6 +53,13 @@ export default function FAQ() {
 
   return (
     <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
       <Script
         id="faq-schema"
         type="application/ld+json"

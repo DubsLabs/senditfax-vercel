@@ -7,11 +7,16 @@ import Image from "next/image";
 import Logo from "../../images/logo.png";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { Button, TextField } from "@mui/material";
+import Script from "next/script";
+import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 
 export default function StatusPage() {
   const router = useRouter();
   const [faxId, setFaxId] = useState("");
   const [error, setError] = useState("");
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Check Fax Status", href: "/status" }
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,8 +46,16 @@ export default function StatusPage() {
   };
 
   return (
-    <section className="max-w-2xl mx-auto px-4 py-8">
-      <Breadcrumbs items={[{ label: "Check Fax Status", href: "/status" }]} />
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <section className="max-w-2xl mx-auto px-4 py-8">
+        <Breadcrumbs items={[{ label: "Check Fax Status", href: "/status" }]} />
       
       <div className="mb-8 flex flex-col items-center w-full gap-4">
         <Link href="/">
@@ -146,5 +159,6 @@ export default function StatusPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

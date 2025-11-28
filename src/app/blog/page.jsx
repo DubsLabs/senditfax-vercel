@@ -4,6 +4,8 @@ import Image from "next/image";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import FullSEO from "../../config/FullSEO";
 import { getPosts } from "../../utils/wordpress";
+import Script from "next/script";
+import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 
 export const dynamic = "force-dynamic"; // Always fresh data, no caching
 
@@ -31,10 +33,19 @@ function stripHtml(html) {
 export default async function BlogPage({ searchParams }) {
   const currentPage = parseInt(searchParams?.page || "1", 10);
   const { posts, totalPages, total, currentPage: page } = await getPosts(currentPage, 10);
+  const breadcrumbSchema = generateBreadcrumbSchema([{ label: "Blog", href: "/blog" }]);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-8">
-      <Breadcrumbs items={[{ label: "Blog", href: "/blog" }]} />
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <section className="max-w-7xl mx-auto px-4 py-8">
+        <Breadcrumbs items={[{ label: "Blog", href: "/blog" }]} />
 
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog</h1>
@@ -185,6 +196,7 @@ export default async function BlogPage({ searchParams }) {
         </>
       )}
     </section>
+    </>
   );
 }
 

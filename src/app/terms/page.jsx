@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../images/logo.png";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import Script from "next/script";
+import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 
 export const metadata = { 
   ...FullSEO.Terms,
@@ -12,9 +14,21 @@ export const metadata = {
 };
 
 export default function Terms() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { label: "Terms of Use", href: "/terms" }
+  ]);
+
   return (
-    <section className="max-w-4xl mx-auto px-4 py-8 md:px-8">
-      <Breadcrumbs items={[{ label: "Terms of Use", href: "/terms" }]} />
+    <>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+      <section className="max-w-4xl mx-auto px-4 py-8 md:px-8">
+        <Breadcrumbs items={[{ label: "Terms of Use", href: "/terms" }]} />
       
       <div className="mb-8 flex flex-col items-center w-full gap-4 text-sm">
         <Link href="/">
@@ -280,5 +294,6 @@ export default function Terms() {
         </div>
       </div>
     </section>
+    </>
   );
 }
