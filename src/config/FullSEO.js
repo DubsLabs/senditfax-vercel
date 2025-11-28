@@ -47,6 +47,24 @@ const FullSEO = {
       "Send personal faxes from home without a fax machine. Free online fax service for individuals. Send applications, forms, and personal documents easily.",
     keywords: "personal fax, send fax from home, fax for individuals, personal document fax, home fax service, individual fax, personal use fax, send personal documents",
   },
+  CookiePolicy: {
+    title: "Cookie Policy - How SendItFax Uses Cookies",
+    description:
+      "Learn about how SendItFax uses cookies to improve your experience. Understand cookie types, controls, and your privacy options. GDPR compliant cookie policy.",
+    keywords: "cookie policy, cookies, website cookies, privacy cookies, analytics cookies, cookie settings, GDPR cookies, senditfax cookies",
+  },
+  RefundPolicy: {
+    title: "Refund Policy - SendItFax Money-Back Guarantee",
+    description:
+      "SendItFax refund policy for paid fax services. Learn about refund eligibility, process, and terms. Get your money back for failed transmissions or service errors.",
+    keywords: "refund policy, money back guarantee, fax refund, payment refund, senditfax refund, refund process, refund terms",
+  },
+  Features: {
+    title: "Features - SendItFax Online Fax Service Features",
+    description:
+      "Discover SendItFax features: free and paid fax options, no registration, secure encryption, fast delivery, file format support, and more. Compare free vs paid plans.",
+    keywords: "fax features, online fax features, free fax features, paid fax features, fax service features, senditfax features, fax capabilities",
+  },
 };
 
 export default FullSEO;

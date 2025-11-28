@@ -49,6 +49,9 @@ function Footer() {
                 <Link href="/blog" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Blog
                 </Link>
+                <Link href="/features" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  Features
+                </Link>
                 <Link href="/status" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Check Fax Status
                 </Link>
@@ -66,16 +69,16 @@ function Footer() {
                   How to Send Fax Online
                 </Link>
                 <Link href="/how-to-send-fax-for-doctors" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  How to Send Fax Online for Doctors
+                  How to Send Fax for Doctors
                 </Link>
                 <Link href="/how-to-send-fax-for-lawyers" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  How to Send Fax Online for Lawyers
+                  How to Send Fax for Lawyers
                 </Link>
                 <Link href="/how-to-send-fax-personal" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  How to Send Fax Online for Personal Use
+                  How to Send Fax for Personal Use
                 </Link>
                 <Link href="/how-to-send-fax-for-small-business" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  How to Send Fax Online for Small Business
+                  How to Send Fax for Small Business
                 </Link>
               </div>
             </nav>
@@ -89,6 +92,12 @@ function Footer() {
                 </Link>
                 <Link href="/privacy" className="text-gray-600 hover:text-blue-600 transition-colors">
                   Privacy Policy
+                </Link>
+                <Link href="/cookie-policy" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  Cookie Policy
+                </Link>
+                <Link href="/refund-policy" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  Refund Policy
                 </Link>
               </div>
             </nav>
