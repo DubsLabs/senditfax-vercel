@@ -31,7 +31,8 @@ function stripHtml(html) {
 }
 
 export default async function BlogPage({ searchParams }) {
-  const currentPage = parseInt(searchParams?.page || "1", 10);
+  const params = await searchParams;
+  const currentPage = parseInt(params?.page || "1", 10);
   const { posts, totalPages, total, currentPage: page } = await getPosts(currentPage, 10);
   const breadcrumbSchema = generateBreadcrumbSchema([{ label: "Blog", href: "/blog" }]);
 
