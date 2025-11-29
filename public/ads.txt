@@ -1,12 +1,1 @@
-# ads.txt file for senditfax.com
-# This file authorizes Google AdSense and other ad networks to serve ads on this domain
-# 
-# IMPORTANT: Replace PUBLISHER_ID with your actual AdSense Publisher ID after approval
-# You'll find your Publisher ID in AdSense dashboard under Account > Account information
-# Format: pub-XXXXXXXXXXXXXXXX
-
-google.com, PUBLISHER_ID, DIRECT, f08c47fec0942fa0
-
-# Add other authorized ad networks here if needed
-# Example for other networks:
-# example.com, example-publisher-id, DIRECT
+google.com, pub-1688764604430717, DIRECT, f08c47fec0942fa0
