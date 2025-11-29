@@ -9,6 +9,7 @@ import Script from "next/script";
 import { generateBreadcrumbSchema } from "../../../utils/breadcrumbSchema";
 import SocialShare from "../../../components/SocialShare";
 import ReadingProgress from "../../../components/ReadingProgress";
+import "../../../styles/wordpress-post.css";
 
 export const dynamic = "force-dynamic"; // Always fresh data, no caching
 
