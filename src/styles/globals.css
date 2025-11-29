@@ -104,3 +104,295 @@ main {
   left: 0;
   z-index: 10000;
 }
+
+/* WordPress Gutenberg Blocks Styles */
+/* These styles ensure WordPress content displays properly with styling */
+
+/* WordPress Image Blocks */
+.wp-block-image {
+  margin: 2rem 0;
+}
+
+.wp-block-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.wp-block-image.size-large img {
+  width: 100%;
+}
+
+.wp-block-image.size-medium img {
+  max-width: 600px;
+}
+
+.wp-block-image.size-full img {
+  width: 100%;
+}
+
+/* WordPress Table Blocks */
+.wp-block-table {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.wp-block-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.wp-block-table thead {
+  background-color: #f3f4f6;
+}
+
+.wp-block-table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.wp-block-table td {
+  padding: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.wp-block-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* WordPress Quote/Blockquote Blocks */
+.wp-block-quote {
+  border-left: 4px solid #2563eb;
+  background-color: #eff6ff;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: #374151;
+}
+
+.wp-block-quote p {
+  margin: 0.5rem 0;
+}
+
+.wp-block-quote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-style: normal;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* WordPress List Blocks */
+.wp-block-list {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.wp-block-list li {
+  margin: 0.5rem 0;
+  line-height: 1.75;
+}
+
+/* WordPress Paragraph Blocks */
+.wp-block-paragraph {
+  margin: 1.5rem 0;
+  line-height: 1.75;
+  color: #374151;
+}
+
+/* WordPress Heading Blocks */
+.wp-block-heading {
+  font-weight: 700;
+  line-height: 1.2;
+  color: #111827;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.wp-block-heading h1 {
+  font-size: 2.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.wp-block-heading h2 {
+  font-size: 1.875rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.wp-block-heading h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.wp-block-heading h4 {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* WordPress Code Blocks */
+.wp-block-code {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+}
+
+.wp-block-code code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* WordPress Preformatted Blocks */
+.wp-block-preformatted {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  white-space: pre;
+}
+
+/* WordPress Separator/HR Blocks */
+.wp-block-separator {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #d1d5db;
+}
+
+/* WordPress Video Blocks */
+.wp-block-video {
+  margin: 2rem 0;
+}
+
+.wp-block-video video {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* WordPress Embed Blocks (YouTube, etc.) */
+.wp-block-embed {
+  margin: 2rem 0;
+}
+
+.wp-block-embed iframe {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+/* WordPress Columns Blocks */
+.wp-block-columns {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.wp-block-column {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .wp-block-columns {
+    flex-direction: column;
+  }
+  
+  .wp-block-column {
+    flex: 1 1 100%;
+  }
+}
+
+/* WordPress Button Blocks */
+.wp-block-button {
+  margin: 1.5rem 0;
+}
+
+.wp-block-button__link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.wp-block-button__link:hover {
+  background-color: #1d4ed8;
+}
+
+/* WordPress Gallery Blocks */
+.wp-block-gallery {
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.wp-block-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* General WordPress block spacing */
+.wp-block {
+  margin: 1.5rem 0;
+}
+
+/* Ensure figures have proper styling */
+figure {
+  margin: 2rem 0;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Table styling within prose content */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+
+.prose table thead {
+  background-color: #f3f4f6;
+}
+
+.prose table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.prose table td {
+  padding: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.prose table tbody tr:hover {
+  background-color: #f9fafb;
+}
