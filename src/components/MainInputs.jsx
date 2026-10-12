@@ -59,6 +59,15 @@ export default function MainInputs() {
     receiverFax: { hasError: false, isInteracted: false },
   });
 
+  // Customer's timezone, so emails and the tracking page can show local times
+  const getBrowserTimezone = () => {
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    } catch {
+      return "";
+    }
+  };
+
   // Main function to Check Inputs and Send Fax
   const sendFaxHandler = async (isPayment) => {
     // Checking for Inputs' Errors and Warnings
@@ -81,15 +90,19 @@ export default function MainInputs() {
       return addError("The number you entered is not a fax number.");
     }
 
-    // Checking for Text Area and Files
+    // Checking for Text Area and Files.
+    // The text box only appears on the cover page, so with the cover page removed
+    // the only thing that can be sent is an attached file.
+    if (isCoverPageRemoved && uppyFiles.length === 0) {
+      return addError("You removed the cover page, so please attach at least one file. The text box only appears on the cover page.");
+    }
     if (textArea === "" && uppyFiles.length === 0) {
-      return addError("The Text Area is empty and no files are selected");
-    } else {
-      if (textArea === "" && !isCoverPageRemoved) addWarning("The Text Area field is empty");
-      if (uppyFiles.length === 0 && !window.confirm("Do you really want to send a fax without attaching a file first?")) {
-        addWarning("No files are selected");
-        return;
-      }
+      return addError("Please attach a file or enter some cover page text. There is nothing to send yet.");
+    }
+    if (textArea === "" && !isCoverPageRemoved) addWarning("The Text Area field is empty");
+    if (uppyFiles.length === 0 && !window.confirm("Do you really want to send a fax without attaching a file first?")) {
+      addWarning("No files are selected");
+      return;
     }
 
     // Checkbox only for Paid Faxes
@@ -106,7 +119,7 @@ export default function MainInputs() {
     if (isPayment) {
       setIsSidebarOpen(true);
     } else {
-      addInfo("Fax request initiated!\nWaiting for status message");
+      addInfo("Submitting your fax request...");
 
       // Creating FormData to Send Fax
       const formData = new FormData();
@@ -117,6 +130,7 @@ export default function MainInputs() {
       formData.append("receiverFax", receiveFax);
       formData.append("textArea", textArea);
       formData.append("totalPages", totalPages);
+      formData.append("senderTimezone", getBrowserTimezone());
 
       if (sendCompany !== "") formData.append("senderCompany", sendCompany);
       if (receiveCompany !== "") formData.append("receiverCompany", receiveCompany);
@@ -130,7 +144,7 @@ export default function MainInputs() {
         });
 
         const result = await response.json();
-        addSuccess(`${result.msg}\nID - ${result.id} | Status - ${result.status}`);
+        addSuccess(`Your fax is queued (ID ${result.id}).\nWe'll email you once it's delivered.`);
 
         if (!isPayment) {
           addFaxLocalStorage();
@@ -355,7 +369,12 @@ export default function MainInputs() {
               name="checkbox"
               id="checkbox_id"
               defaultChecked={isCoverPageRemoved}
-              onChange={(e) => setIsCoverPageRemoved(e.target.checked)}
+              onChange={(e) => {
+                setIsCoverPageRemoved(e.target.checked);
+                if (e.target.checked && textArea !== "") {
+                  addWarning("Cover page removed: the text you typed won't be sent. Only attached files will be faxed.");
+                }
+              }}
               aria-describedby="checkbox-description"
             />
             <label htmlFor="checkbox_id" className="cursor-pointer">
