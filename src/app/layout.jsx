@@ -122,11 +122,6 @@ export default function RootLayout({ children }) {
               name: "SendItFax",
               url: "https://senditfax.com",
               description: "Send free faxes online to USA and Canada without registration or account",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://senditfax.com/?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
             }),
           }}
         />
@@ -172,11 +167,6 @@ export default function RootLayout({ children }) {
                   description: "Send up to 25 pages with priority delivery and no branding"
                 }
               ],
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.7",
-                reviewCount: "150"
-              }
             }),
           }}
         />
@@ -215,7 +205,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <Script
-          id="structured-data-reviews"
+          id="structured-data-product"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -233,57 +223,6 @@ export default function RootLayout({ children }) {
                 highPrice: "1.99",
                 priceCurrency: "USD"
               },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.8",
-                reviewCount: "250",
-                bestRating: "5",
-                worstRating: "1"
-              },
-              review: [
-                {
-                  "@type": "Review",
-                  author: {
-                    "@type": "Person",
-                    name: "Sarah Johnson"
-                  },
-                  datePublished: "2025-03-15",
-                  reviewBody: "SendItFax saved my business! I needed to send urgent contracts to a client, and their service was incredibly fast and reliable. No registration hassle - just upload and send. Highly recommend!",
-                  reviewRating: {
-                    "@type": "Rating",
-                    ratingValue: "5",
-                    bestRating: "5"
-                  }
-                },
-                {
-                  "@type": "Review",
-                  author: {
-                    "@type": "Person",
-                    name: "Michael Chen"
-                  },
-                  datePublished: "2024-12-10",
-                  reviewBody: "I was skeptical about free fax services, but SendItFax exceeded my expectations. The interface is clean, uploads are quick, and I received delivery confirmation within minutes. Perfect for occasional fax needs.",
-                  reviewRating: {
-                    "@type": "Rating",
-                    ratingValue: "5",
-                    bestRating: "5"
-                  }
-                },
-                {
-                  "@type": "Review",
-                  author: {
-                    "@type": "Person",
-                    name: "Emily Rodriguez"
-                  },
-                  datePublished: "2025-07-08",
-                  reviewBody: "As a medical office, we send multiple faxes daily. SendItFax's priority service is worth every penny - fast delivery, professional appearance, and reliable tracking. It's become our go-to solution.",
-                  reviewRating: {
-                    "@type": "Rating",
-                    ratingValue: "5",
-                    bestRating: "5"
-                  }
-                }
-              ]
             }),
           }}
         />

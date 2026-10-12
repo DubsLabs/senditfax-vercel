@@ -7,14 +7,27 @@ import { getPosts } from "../../utils/wordpress";
 import Script from "next/script";
 import { generateBreadcrumbSchema } from "../../utils/breadcrumbSchema";
 
-export const dynamic = "force-dynamic"; // Always fresh data, no caching
+// WordPress data is cached for an hour (see utils/wordpress.js); the page
+// itself renders per request because it reads ?page=.
+export const revalidate = 3600;
 
-export const metadata = {
-  ...FullSEO.Blog,
-  alternates: {
-    canonical: "https://senditfax.com/blog",
-  },
-};
+function pageNumberFrom(params) {
+  const parsed = parseInt(params?.page || "1", 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+}
+
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const page = pageNumberFrom(params);
+  // Each paginated page is its own canonical URL. Pointing every page at
+  // /blog told search engines pages 2+ were duplicates and hid deep posts.
+  const canonical = page > 1 ? `https://senditfax.com/blog?page=${page}` : "https://senditfax.com/blog";
+  return {
+    ...FullSEO.Blog,
+    title: page > 1 ? `${FullSEO.Blog.title} - Page ${page}` : FullSEO.Blog.title,
+    alternates: { canonical },
+  };
+}
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -32,7 +45,7 @@ function stripHtml(html) {
 
 export default async function BlogPage({ searchParams }) {
   const params = await searchParams;
-  const currentPage = parseInt(params?.page || "1", 10);
+  const currentPage = pageNumberFrom(params);
   const { posts, totalPages, total, currentPage: page } = await getPosts(currentPage, 10);
   const breadcrumbSchema = generateBreadcrumbSchema([{ label: "Blog", href: "/blog" }]);
 
