@@ -77,10 +77,12 @@ export default function StripeSidebarFax({ setIsSidebarOpen, formDataObject }) {
 
         addError(errorMessage);
         setIsLoading(false);
-      } else if (paymentIntent && paymentIntent.status === "succeeded") {
+      } else if (paymentIntent && ["requires_capture", "succeeded"].includes(paymentIntent.status)) {
+        // "requires_capture": the backend places a hold and only charges the card once
+        // the fax is delivered. "succeeded" is kept for backends that charge immediately.
         setIsLoading(false);
         setIsSuccessful(true);
-        addInfo(`Payment ${paymentIntent.id} has been successful\nFax request has been sent! Wait for the success message`);
+        addInfo(`Payment ${paymentIntent.id} has been authorized\nFax request has been sent! You'll only be charged once the fax is delivered.`);
 
         // Creating FormData to Send Fax
         const {
