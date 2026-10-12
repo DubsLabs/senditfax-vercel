@@ -364,7 +364,7 @@ export default function HowToSendFaxForLawyers() {
             <h4 className="font-semibold text-blue-900 text-lg mb-3">PRIORITY FAX - $1.99</h4>
             <ul className="text-sm space-y-2 text-blue-800">
               <li>• No account, no subscription</li>
-              <li>• $1.99 per fax (Stripe payment)</li>
+              <li>• $1.99 per fax, charged only when delivered (Stripe)</li>
               <li>• Max 25 pages + optional cover</li>
               <li>• Priority delivery vs. free faxes</li>
               <li>• No SendItFax branding</li>

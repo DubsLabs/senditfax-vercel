@@ -59,17 +59,23 @@ PRIORITY FAX ($1.99):
     • No SendItFax branding
     • Optional: remove cover page entirely
     • Priority delivery (2-5 minutes)
-    • Secure Stripe payment`,
+    • Secure Stripe payment
+    • Charged only when delivered - no charge if the fax fails`,
   },
   {
     category: "Pricing & Plans",
     question: "How does the $1.99 priority fax work?",
-    text: "When you choose the priority option, you'll be directed to a secure Stripe payment page. After payment, your fax is placed in a priority queue for faster delivery. You can send up to 25 pages, remove branding, and even send without a cover page. No subscription or recurring charges - you only pay when you send.",
+    text: "When you choose the priority option, you'll be directed to a secure Stripe payment form. Stripe places a temporary $1.99 hold on your card and your fax goes into the priority queue. Your card is only actually charged once we confirm the fax was delivered. If it can't be delivered, the hold is released automatically and you're not charged. You can send up to 25 pages, remove branding, and even send without a cover page. No subscription or recurring charges.",
   },
   {
     category: "Pricing & Plans",
     question: "Are there any hidden fees?",
-    text: "No! Free faxes are 100% free with no hidden charges. Priority faxes cost exactly $1.99 per transmission - no additional fees, taxes, or surprise charges. What you see is what you pay.",
+    text: "No! Free faxes are 100% free with no hidden charges. Priority faxes cost exactly $1.99 per transmission - no additional fees, taxes, or surprise charges. And if your priority fax can't be delivered, you aren't charged at all. What you see is what you pay.",
+  },
+  {
+    category: "Pricing & Plans",
+    question: "Will I be charged if my priority fax fails?",
+    text: "No. When you pay for a priority fax, Stripe only places a hold on your card. We capture the $1.99 after the fax is confirmed delivered. If delivery fails (busy line, wrong number, machine offline), the hold is released automatically and you'll get an email confirming you weren't charged. Depending on your bank, the released hold can take a few days to disappear from your statement. You're then free to check the number and send again.",
   },
   {
     category: "Pricing & Plans",
@@ -118,7 +124,7 @@ PRIORITY FAX ($1.99):
   {
     category: "Delivery & Tracking",
     question: "What if my fax fails to deliver?",
-    text: "If delivery fails, you'll receive an email notification explaining the reason (busy line, no answer, disconnected number, etc.). Common causes include the recipient's fax machine being turned off, out of paper, or the line being busy. You can resend your fax for free - just use the same information and upload the document again.",
+    text: "If delivery fails, you'll receive an email notification explaining the reason (busy line, no answer, disconnected number, etc.). Common causes include the recipient's fax machine being turned off, out of paper, or the line being busy. You can resend your fax for free - just use the same information and upload the document again. For priority faxes, a failed delivery means your card is not charged: the $1.99 hold is released automatically.",
   },
   {
     category: "Delivery & Tracking",

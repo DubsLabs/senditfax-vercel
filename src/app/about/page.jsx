@@ -77,6 +77,7 @@ export default function About() {
           <li><strong>No Branding:</strong> Remove SendItFax branding from cover page</li>
           <li><strong>Optional Cover:</strong> Choice to send without a cover page</li>
           <li><strong>No Subscription:</strong> Pay only when you need it</li>
+          <li><strong>Charged Only on Delivery:</strong> Your card is only charged once the fax is confirmed delivered. If it can't be delivered, you're not charged.</li>
         </ul>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">Our Coverage</h2>

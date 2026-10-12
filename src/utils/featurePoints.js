@@ -8,7 +8,8 @@ const featurePoints = {
   ],
   Paid: [
     "No account, no free trial",
-    "$1.99 per fax (Stripe)",
+    "$1.99 per fax, charged only when delivered",
+    "Not delivered? You're not charged",
     "Max 25 pages + optional cover",
     "Priority delivery vs. free faxes",
     "No SendItFax branding on the cover page",
