@@ -77,6 +77,12 @@ export default function RefundPolicy() {
             <p className="text-gray-700">
               SendItFax offers both free and paid fax services. Our paid service costs $1.99 per fax and includes priority delivery, up to 25 pages, and no branding. This refund policy applies specifically to paid fax transactions.
             </p>
+            <div className="bg-green-50 rounded-lg p-5 border border-green-200">
+              <h3 className="text-xl font-semibold mb-3 text-gray-800">You Are Only Charged When Your Fax Is Delivered</h3>
+              <p className="text-gray-700">
+                When you pay for a priority fax, Stripe places a temporary $1.99 hold on your card. We only capture that payment once the fax is confirmed delivered. If the fax cannot be delivered for any reason, the hold is released automatically and you are not charged. In most cases, this means no refund is ever needed.
+              </p>
+            </div>
             <div className="bg-blue-50 rounded-lg p-5 border border-blue-200">
               <h3 className="text-xl font-semibold mb-3 text-gray-800">Free Service</h3>
               <p className="text-gray-700">
@@ -92,11 +98,11 @@ export default function RefundPolicy() {
             <h2 className="text-2xl font-semibold text-gray-800 m-0">2. Refund Eligibility</h2>
           </div>
           <div className="pl-4 space-y-4">
-            <p className="text-gray-700">Refunds may be issued in the following circumstances:</p>
+            <p className="text-gray-700">Because undelivered faxes are never charged, refunds mainly cover the rare cases where a charge was made in error. Refunds may be issued in the following circumstances:</p>
             <div className="bg-green-50 rounded-lg p-5 border border-green-200">
               <h3 className="text-xl font-semibold mb-3 text-gray-800">Eligible for Refund</h3>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                <li><strong>Failed Transmission:</strong> If the fax fails to transmit due to a technical error on our part</li>
+                <li><strong>Charged Despite Failure:</strong> If your fax was not delivered but your card was charged anyway (this should not happen, but if it does we will refund it)</li>
                 <li><strong>Duplicate Payment:</strong> If you were charged multiple times for the same fax</li>
                 <li><strong>Service Unavailability:</strong> If our service was unavailable at the time of your payment and the fax could not be sent</li>
                 <li><strong>Incorrect Processing:</strong> If we processed your payment but failed to send the fax due to our error</li>
@@ -120,7 +126,7 @@ export default function RefundPolicy() {
               <h3 className="text-xl font-semibold mb-3 text-gray-800">Not Eligible for Refund</h3>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 <li><strong>Successful Transmission:</strong> If the fax was successfully delivered to the recipient</li>
-                <li><strong>Recipient Issues:</strong> If the recipient's fax machine was busy, offline, or unable to receive</li>
+                <li><strong>Recipient Issues:</strong> If the recipient's fax machine was busy, offline, or unable to receive, the fax is not delivered and you are not charged in the first place, so no refund applies</li>
                 <li><strong>Incorrect Information:</strong> If you provided incorrect recipient fax number or information</li>
                 <li><strong>File Format Issues:</strong> If your file was corrupted, in an unsupported format, or contained errors</li>
                 <li><strong>User Error:</strong> If the issue was caused by user error (wrong number, wrong file, etc.)</li>
@@ -227,7 +233,7 @@ export default function RefundPolicy() {
           <div className="grid md:grid-cols-2 gap-4 text-sm">
             <div className="bg-white rounded p-4 shadow-sm">
               <p className="font-semibold text-green-700 mb-1">✓ Eligible for Refund</p>
-              <p className="text-gray-600">Failed transmissions, duplicate payments, service errors</p>
+              <p className="text-gray-600">Charged despite a failed delivery, duplicate payments, service errors. Undelivered faxes are never charged.</p>
             </div>
             <div className="bg-white rounded p-4 shadow-sm">
               <p className="font-semibold text-red-700 mb-1">✗ Not Eligible</p>

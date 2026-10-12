@@ -31,7 +31,7 @@ export const metadata = {
   openGraph: {
     title: "Send Free Fax Online to USA & Canada | No Registration Required",
     description:
-      "Send faxes online for free to USA and Canada without registration or account. No fax machine needed. Send up to 3 pages free or choose priority delivery for $1.99.",
+      "Send faxes online for free to USA and Canada without registration or account. No fax machine needed. Send up to 3 pages free or choose priority delivery for $1.99, charged only when your fax is delivered.",
     images: [
       {
         url: "https://senditfax.com/og-meta-senditfax.jpg",
@@ -48,7 +48,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Send Free Fax Online to USA & Canada | No Registration Required",
     description:
-      "Send faxes online for free to USA and Canada without registration or account. No fax machine needed. Send up to 3 pages free or choose priority delivery for $1.99.",
+      "Send faxes online for free to USA and Canada without registration or account. No fax machine needed. Send up to 3 pages free or choose priority delivery for $1.99, charged only when your fax is delivered.",
     images: ["https://senditfax.com/og-meta-senditfax.jpg"],
   },
   icons: {
@@ -139,7 +139,7 @@ export default function RootLayout({ children }) {
               "@type": "Service",
               serviceType: "Online Fax Service",
               name: "SendItFax",
-              description: "Free and affordable online faxing service. Send faxes to USA and Canada without registration. Up to 3 pages free or 25 pages for $1.99 with priority delivery.",
+              description: "Free and affordable online faxing service. Send faxes to USA and Canada without registration. Up to 3 pages free or 25 pages for $1.99 with priority delivery, charged only on successful delivery.",
               provider: {
                 "@type": "Organization",
                 name: "SendItFax",

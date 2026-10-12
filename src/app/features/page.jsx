@@ -79,7 +79,7 @@ export default function Features() {
             <div className="text-center mb-6">
               <h2 className="text-3xl font-bold text-blue-600 mb-2">Priority Fax</h2>
               <p className="text-4xl font-bold text-gray-800">$1.99</p>
-              <p className="text-gray-600 text-sm mt-1">Per fax, one-time payment</p>
+              <p className="text-gray-600 text-sm mt-1">Per fax. Charged only when your fax is delivered.</p>
             </div>
             <ul className="space-y-3">
               {featurePoints.Paid.map((feature, index) => (

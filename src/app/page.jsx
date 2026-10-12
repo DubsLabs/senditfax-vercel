@@ -50,7 +50,7 @@ export default function Main() {
             Send <span className="font-semibold">Free Fax Online</span> to USA & Canada - No Registration Required
           </h1>
           <p className="text-center text-base cursor-default">
-            Fast, secure online fax service. Send up to 3 pages free or 25 pages for $1.99. No account needed.
+            Fast, secure online fax service. Send up to 3 pages free or 25 pages for $1.99, charged only when delivered. No account needed.
           </p>
           <p className="text-center text-sm text-gray-600">
             Have questions?{" "}
