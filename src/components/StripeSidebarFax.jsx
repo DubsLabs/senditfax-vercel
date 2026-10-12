@@ -82,7 +82,7 @@ export default function StripeSidebarFax({ setIsSidebarOpen, formDataObject }) {
         // the fax is delivered. "succeeded" is kept for backends that charge immediately.
         setIsLoading(false);
         setIsSuccessful(true);
-        addInfo(`Payment ${paymentIntent.id} has been authorized\nFax request has been sent! You'll only be charged once the fax is delivered.`);
+        addInfo("Payment authorized. Submitting your fax request...");
 
         // Creating FormData to Send Fax
         const {
@@ -108,6 +108,11 @@ export default function StripeSidebarFax({ setIsSidebarOpen, formDataObject }) {
         formData.append("paymentIntentId", paymentIntent.id);
         formData.append("isCoverPageRemoved", isCoverPageRemoved);
         formData.append("totalPages", totalPages);
+        try {
+          formData.append("senderTimezone", Intl.DateTimeFormat().resolvedOptions().timeZone || "");
+        } catch {
+          formData.append("senderTimezone", "");
+        }
 
         if (sendCompany !== "") formData.append("senderCompany", sendCompany);
         if (receiveCompany !== "") formData.append("receiverCompany", receiveCompany);
@@ -121,7 +126,9 @@ export default function StripeSidebarFax({ setIsSidebarOpen, formDataObject }) {
           });
 
           const result = await response.json();
-          addSuccess(`${result.msg}\nID - ${result.id} | Status - ${result.status}`);
+          addSuccess(
+            `Your fax is queued (ID ${result.id}).\nWe'll email you once it's delivered. Your card is only charged after delivery.`
+          );
 
           setTimeout(() => {
             setIsSidebarOpen(false);

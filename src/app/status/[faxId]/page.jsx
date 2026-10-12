@@ -3,6 +3,7 @@ import Link from "next/link";
 import StatusInputs from "@/components/StatusInputs";
 import StatusErrorHandler from "@/components/StatusErrorHandler";
 import AdSense from "@/components/AdSense";
+import StatusAutoRefresh from "@/components/StatusAutoRefresh";
 
 export const generateMetadata = async ({ params }) => {
   const { faxId } = await params;
@@ -21,7 +22,7 @@ export default async function Status({ params }) {
   let faxData;
   let errorMessage = null;
   try {
-    const request = await fetch(`https://nextfaxapi-dlreibwmnq-uc.a.run.app/statusFax/${faxId}`);
+    const request = await fetch(`https://nextfaxapi-dlreibwmnq-uc.a.run.app/statusFax/${faxId}`, { cache: "no-store" });
     faxData = await request.json();
 
     if (request.status === 404) {
@@ -39,7 +40,9 @@ export default async function Status({ params }) {
   const getStatusBadge = (status) => {
     const statusConfig = {
       'Sent': { color: 'bg-green-100 text-green-800 border-green-300', icon: '✅', label: 'Sent Successfully' },
+      'Queued': { color: 'bg-yellow-100 text-yellow-800 border-yellow-300', icon: '⏳', label: 'Sending' },
       'Pending': { color: 'bg-yellow-100 text-yellow-800 border-yellow-300', icon: '⏳', label: 'Pending' },
+      'SendingFailed': { color: 'bg-red-100 text-red-800 border-red-300', icon: '❌', label: 'Could Not Be Delivered' },
       'Failed': { color: 'bg-red-100 text-red-800 border-red-300', icon: '❌', label: 'Failed' },
       'Processing': { color: 'bg-blue-100 text-blue-800 border-blue-300', icon: '🔄', label: 'Processing' },
     };
@@ -47,6 +50,20 @@ export default async function Status({ params }) {
   };
 
   const statusBadge = getStatusBadge(faxData?.faxStatus);
+
+  // Plain-English payment status. The backend places a hold at checkout and
+  // only captures it once the fax is delivered.
+  const getPaymentStatusDisplay = (status) => {
+    const config = {
+      'requires_capture': { color: 'text-yellow-700', label: 'On hold - charged only after delivery' },
+      'captured': { color: 'text-green-600', label: 'Charged - fax delivered' },
+      'succeeded': { color: 'text-green-600', label: 'Charged' },
+      'canceled': { color: 'text-gray-700', label: 'Hold released - not charged' },
+      'refunded': { color: 'text-gray-700', label: 'Refunded' },
+    };
+    return config[status] || { color: 'text-gray-700', label: status };
+  };
+  const paymentStatusDisplay = getPaymentStatusDisplay(faxData?.paymentStatus);
 
   return (
     <section className="flex flex-col md:flex-row items-start justify-between gap-4 w-full max-w-7xl mx-auto">
@@ -75,6 +92,11 @@ export default async function Status({ params }) {
               </div>
             </div>
           </div>
+
+          {/* While queued: explain what happens next and refresh automatically */}
+          {!errorMessage && (
+            <StatusAutoRefresh faxStatus={faxData?.faxStatus} faxType={faxData?.faxType} senderEmail={faxData?.senderEmail} />
+          )}
 
           {/* Sender & Receiver Info */}
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -156,7 +178,7 @@ export default async function Status({ params }) {
                   </div>
                   <div className="flex flex-col">
                     <span className="font-medium text-gray-600 mb-1">Payment Status</span>
-                    <span className="text-green-600 font-semibold">{faxData?.paymentStatus}</span>
+                    <span className={`${paymentStatusDisplay.color} font-semibold`}>{paymentStatusDisplay.label}</span>
                   </div>
                 </>
               )}
