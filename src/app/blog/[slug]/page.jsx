@@ -11,11 +11,19 @@ import SocialShare from "../../../components/SocialShare";
 import ReadingProgress from "../../../components/ReadingProgress";
 import "../../../styles/wordpress-post.css";
 
-export const dynamic = "force-dynamic"; // Always fresh data, no caching
+// Posts are statically generated and refreshed every hour (ISR) instead of
+// hitting WordPress on every request.
+export const revalidate = 3600;
+export const dynamicParams = true;
+
+// Prerender only the newest posts at build time; the rest are generated on
+// first request and then cached (ISR). Prerendering all 300+ posts at once
+// overloads the WordPress host and produced 500s during the build.
+const PRERENDER_LIMIT = 30;
 
 export async function generateStaticParams() {
   const slugs = await getAllPostSlugs();
-  return slugs.map((slug) => ({
+  return slugs.slice(0, PRERENDER_LIMIT).map((slug) => ({
     slug: slug,
   }));
 }
