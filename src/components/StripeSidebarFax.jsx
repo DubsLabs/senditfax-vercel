@@ -125,6 +125,10 @@ export default function StripeSidebarFax({ setIsSidebarOpen, formDataObject }) {
             body: formData,
           });
 
+          if (!response.ok) {
+            throw new Error("send_failed_" + response.status);
+          }
+
           const result = await response.json();
           addSuccess(
             `Your fax is queued (ID ${result.id}).\nWe'll email you once it's delivered. Your card is only charged after delivery.`
@@ -138,7 +142,8 @@ export default function StripeSidebarFax({ setIsSidebarOpen, formDataObject }) {
             window.location.href = `/status/${result.id}`;
           }, 3000);
         } catch (error) {
-          addError(error.error);
+          console.log(error);
+          addError("Your fax couldn't be sent and you have not been charged. Any temporary hold on your card will be released. Please try again or contact support@senditfax.com.");
         }
       }
     } catch (err) {
