@@ -336,7 +336,7 @@ export default function MainInputs() {
           <div className="cursor-default font-medium">
             Attach <span className="underline">one or more files</span> (DOC, DOCX, or PDF)
           </div>
-          <p className="text-center cursor-default">Attach all files now, can't add more later. Total page limit is 3 (free) or 25 (paid) pages. Files must total under 4 MB.</p>
+          <p className="text-center cursor-default">Attach all files now, can't add more later. Total page limit is 3 (free) or 25 (paid) pages. Files must total under&nbsp;4&nbsp;MB.</p>
 
           <UppyFileUploader uppyFiles={uppyFiles} setUppyFiles={setUppyFiles} totalPages={totalPages} setTotalPages={setTotalPages} />
         </div>
