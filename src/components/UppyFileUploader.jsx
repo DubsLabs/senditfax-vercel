@@ -38,6 +38,13 @@ export default function UppyFileUploader({ uppyFiles, setUppyFiles, totalPages, 
     if (uppyFiles.length >= 3) return addError("You can add only 3 files");
     if (totalPages > 25) return addError("You have exceeded the maximum limit 25 pages.");
 
+    // Vercel rejects uploads over ~4.5 MB, so cap the total before payment.
+    const totalBytes = uppy.getFiles().reduce((sum, f) => sum + (f.size || 0), 0);
+    if (totalBytes > 4 * 1024 * 1024) {
+      uppy.removeFile(file.id);
+      return addError("Files must total under 4 MB. Please compress your PDF and try again.");
+    }
+
     if (!allowedTypes.includes(`.${file.extension}`)) {
       addError("We accept only PDF and DOCX files!");
       uppy.removeFile(file.id);
